@@ -1,0 +1,106 @@
+html{
+  position: relative;
+  min-height: 100%;
+}
+body{
+  margin-bottom: 51px;/*debe tener la misma altura que footer checar altura en Chrome*/
+}
+.text-bold{
+	font-weight: bold;
+}
+
+.border-bottom{
+	border-bottom: 1px dashed #d4d4d4;
+}
+
+.label-dark {
+  background-color: #343a40;
+}
+.label-dark[href]:hover,
+.label-dark[href]:focus {
+  background-color: #343a40;
+}
+
+/*******************************************************************************para GYM*/
+#imprimir {
+	height: auto;
+	width: auto;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #000;
+}
+@page {
+	margin: 0;
+}
+
+/**/
+
+.footer{
+	margin: auto;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+.pointer{
+	cursor: pointer;
+}
+
+/*******************************************************************************para LAVANDERIA*/
+
+.bs-touch{margin-bottom:10px;overflow:hidden}
+.bs-touch-list{padding-left:0;list-style:none}
+.bs-touch .glyphicon{margin-top:5px;margin-bottom:10px;font-size:40px}
+.bs-touch .touch-class{display:block;text-align:center;word-wrap:break-word; font-size:13px; font-weight: bold}
+.bs-touch li{color:#4F5377;float:left;width:50%;height:185px;padding:10px;text-align:center;border:1px solid #fff;background-color:#B7BAD6}
+.bs-touch li:hover{color:#fff;background-color:#4F5377}
+
+.bs-touch-md{margin-bottom:15px;overflow:hidden}
+.bs-touch-md .glyphicon{margin-top:5px;margin-bottom:10px;font-size:50px}
+.bs-touch-md .touch-class{display:block;text-align:center;word-wrap:break-word; font-size:14px}
+.bs-touch-md li{color:#111;float:left;width:50%;height:185px;padding:10px;text-align:center;border:2px solid #fff}
+
+ .bs-touch-sm{margin-bottom:15px;overflow:hidden}
+ .bs-touch-sm .glyphicon{margin-top:5px;margin-bottom:5px;font-size:20px}
+ .bs-touch-sm .touch-class{display:block;text-align:center;word-wrap:break-word; font-size:12px}
+ .bs-touch-sm li{color:#111;float:left;width:100%;height:92px;padding:5px;text-align:center;border:2px solid #fff;background-color:#B7BAD6}
+ .bs-touch-sm li:hover{color:#fff;background-color:#4F5377}
+
+ /*de 480px en adelante*/
+ @media (min-width:480px){
+	.bs-touch{margin-left:0;margin-right:0}
+	.bs-touch li{width:33.33333333333333%;font-size:12px}
+	
+	.bs-touch-md{margin-left:0;margin-right:0}
+	.bs-touch-md li{width:33.33333333333333%;font-size:12px}
+ }
+ 
+ /*de 768px en adelante*/
+ @media (min-width:768px){
+	.bs-touch{margin-left:0;margin-right:0}
+	.bs-touch li{width:25%;font-size:12px}
+	
+	.venta .bs-touch li{width:33.33333333333333%;font-size:12px}
+	
+	.bs-touch-md{margin-left:0;margin-right:0}
+	.bs-touch-md li{width:25%;font-size:12px}
+	
+	.bs-touch-sm{margin-left:0;margin-right:0}
+	.bs-touch-sm li{width:16.66666666666667%;font-size:12px}
+}
+
+.colord{ background-color: #B7BAD6 }
+.color1{ background-color: #00AF84 }
+.color2{ background-color: #E14164 }
+.color3{ background-color: #5E6BA1 }
+
+.colord:hover{color:#fff;background-color:#4F5377}
+.color1:hover{color:#fff;background-color:#039873}
+.color2:hover{color:#fff;background-color:#EF0034}
+.color3:hover{color:#fff;background-color:#3A4883}
