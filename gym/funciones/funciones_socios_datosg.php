@@ -22,7 +22,9 @@
 			'soc_emer_parentesco'	=> request_var( 'soc_emer_parentesco', '' ),
 			'soc_emer_direccion'	=> request_var( 'soc_emer_direccion', '' ),
 			'soc_emer_tel'			=> request_var( 'soc_emer_tel', '' ),
-			'soc_observaciones'		=> request_var( 'soc_observaciones', '' )
+			'soc_observaciones'		=> request_var( 'soc_observaciones', '' ),
+			'soc_descuento'			=> request_var( 'soc_descuento', '' ),
+			'soc_fecha_nacimiento'	=> request_var( 'soc_fecha_nacimiento', '' )
 		);
 		
 		$query		= construir_update( 'san_socios', $datos_sql, "soc_id_socio = $soc_id_socio AND soc_id_empresa = $id_empresa" );

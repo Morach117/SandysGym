@@ -81,11 +81,12 @@
     </div>
     
     <div class="row" id="row_cantidad_codigos" style="<?= ($tipo_promocion == 'Individual') ? '' : 'display: none;' ?>">
-        <label class="col-md-2">Cantidad de Códigos</label>
-        <div class="col-md-4">
-            <input type="number" class="form-control" name="cantidad_codigos" min="1" max="100" value="<?= $cantidad_codigos ?>" />
-        </div>
+    <label class="col-md-2">Cantidad de Códigos</label>
+    <div class="col-md-4">
+        <input type="number" class="form-control" name="cantidad_codigos" min="1" max="100" value="<?= ($tipo_promocion == 'Individual') ? '1' : $cantidad_codigos ?>" />
     </div>
+</div>
+
     
     <div class="row text-center">
         <div class="col-md-12">

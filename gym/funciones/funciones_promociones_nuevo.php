@@ -36,7 +36,7 @@ function guardar_nueva_promocion()
             // Generar la cantidad de códigos especificada
             for ($i = 0; $i < $cantidad_codigos; $i++) {
                 $codigo_generado = generar_codigo_promocion();
-                $query_codigo = "INSERT INTO san_codigos (codigo_generado, id_promocion) VALUES ('$codigo_generado', $id_promocion)";
+                $query_codigo = "INSERT INTO san_codigos (codigo_generado, id_promocion, status) VALUES ('$codigo_generado', $id_promocion, 1)";
                 $resultado_codigo = mysqli_query($conexion, $query_codigo);
                 if (!$resultado_codigo) {
                     $mensaje['num'] = 3;
@@ -47,7 +47,7 @@ function guardar_nueva_promocion()
         } else if ($tipo_promocion == 'Masivo') {
             // Generar un único código para promoción masiva
             $codigo_generado = generar_codigo_promocion();
-            $query_codigo = "INSERT INTO san_codigos (codigo_generado, id_promocion) VALUES ('$codigo_generado', $id_promocion)";
+            $query_codigo = "INSERT INTO san_codigos (codigo_generado, id_promocion, status) VALUES ('$codigo_generado', $id_promocion, 1)";
             $resultado_codigo = mysqli_query($conexion, $query_codigo);
             if (!$resultado_codigo) {
                 $mensaje['num'] = 3;
@@ -69,13 +69,32 @@ function guardar_nueva_promocion()
 // Función para generar un código de promoción
 function generar_codigo_promocion()
 {
-    // Se genera un código aleatorio de 10 caracteres
+    $numeros = '0123456789';
+    $letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     $codigo = '';
-    $caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    $longitud = strlen($caracteres);
-    for ($i = 0; $i < 10; $i++) {
-        $codigo .= $caracteres[rand(0, $longitud - 1)];
+
+    // Generar 2 números
+    for ($i = 0; $i < 2; $i++) {
+        $codigo .= $numeros[rand(0, strlen($numeros) - 1)];
     }
+
+    // Generar 1 letra
+    $codigo .= $letras[rand(0, strlen($letras) - 1)];
+
+    // Generar 2 números
+    for ($i = 0; $i < 2; $i++) {
+        $codigo .= $numeros[rand(0, strlen($numeros) - 1)];
+    }
+
+    // Generar 1 letra
+    $codigo .= $letras[rand(0, strlen($letras) - 1)];
+
+    // Generar 2 números
+    for ($i = 0; $i < 2; $i++) {
+        $codigo .= $numeros[rand(0, strlen($numeros) - 1)];
+    }
+
     return $codigo;
 }
+
 ?>
