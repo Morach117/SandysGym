@@ -1,39 +1,40 @@
 <?php
-	function obtener_servicios( $default = '' )
-	{
-		global $conexion, $id_consorcio, $id_giro;
-		
-		$datos		= "<option value=''>Selecciona...</option>";
-		
-		$query		= "	SELECT 	ser_id_servicio AS id_servicio, 
-								ser_clave AS clave,
-								ser_descripcion AS descripcion,
-								ROUND( ser_cuota, 2 ) AS cuota,
-								ser_meses AS meses
-						FROM 	san_servicios 
-						WHERE	ser_tipo = 'PERIODO'
-						AND		ser_id_consorcio = $id_consorcio
-						AND		ser_id_giro = $id_giro";
-		
-		$resultado	= mysqli_query( $conexion, $query );
-		
-		if( $resultado )
-		{
-			while( $fila = mysqli_fetch_assoc( $resultado ) )
-			{
-				$servicio	= $fila['id_servicio'].'-'.$fila['meses'];
-				
-				if( $default == $servicio )
-					$datos	.= "<option selected value='$servicio'>$fila[descripcion] - $$fila[cuota]</option>";
-				else
-					$datos	.= "<option value='$servicio'>$fila[descripcion] - $$fila[cuota]</option>";
-			}
-		}
-		else
-			echo "Error: ".mysqli_error( $conexion );
-		
-		return $datos;
-	}
+function obtener_servicios($default = '')
+{
+    global $conexion, $id_consorcio, $id_giro;
+
+    $datos = "<option value=''>Selecciona...</option>";
+
+    $query = "SELECT ser_id_servicio AS id_servicio, 
+                     ser_clave AS clave,
+                     ser_descripcion AS descripcion,
+                     ROUND( ser_cuota, 2 ) AS cuota,
+                     ser_meses AS meses
+              FROM   san_servicios 
+              WHERE  ser_tipo = 'PERIODO'
+                     AND ser_id_consorcio = $id_consorcio
+                     AND ser_id_giro = $id_giro
+                     AND ser_status != 'D'"; // Excluir servicios con estatus 0 y 'D'
+
+    $resultado = mysqli_query($conexion, $query);
+
+    if ($resultado) {
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+            $servicio = $fila['id_servicio'] . '-' . $fila['meses'];
+
+            if ($default == $servicio)
+                $datos .= "<option selected value='$servicio'>$fila[descripcion] - $$fila[cuota]</option>";
+            else
+                $datos .= "<option value='$servicio'>$fila[descripcion] - $$fila[cuota]</option>";
+        }
+    } else {
+        echo "Error: " . mysqli_error($conexion);
+    }
+
+    return $datos;
+}
+
+
 	
 	function obtener_servicio( $id_servicio )
 	{
