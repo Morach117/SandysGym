@@ -15,6 +15,9 @@
 	$class_oculto	= 'hide';
 	$op_fecha_pago	= "";
 	$volver			= ".?s=socios";
+
+	$codigo_promocion = isset($_POST['codigo_promocion']) ? $_POST['codigo_promocion'] : '';
+
 	
 	//para el paginado
 	$pag_opciones	= request_var( 'pag_opciones', 0 );
@@ -143,6 +146,11 @@
 		<label class="col-md-3">Socio</label>
 		<label class="col-md-9"><?= $nombre['soc_apepat']." ".$nombre['soc_apemat']." ".$nombre['soc_nombres'] ?></label>
 	</div>
+
+	<div class="row">
+        <label class="col-md-3">Descuento del Cliente (%)</label>
+        <label class="col-md-9"><?= $nombre['soc_descuento']?>%</label>
+    </div>
 	
 	<div class="row">
 		<label class="col-md-3">Archivo de Img</label>
@@ -189,6 +197,13 @@
 						<input type="text" class="form-control" name="pag_fecha_fin" id="pag_fecha_fin" value="<?= $pag_fecha_fin ?>" autocomplete="off" />
 					</div>
 				</div>
+				<div class="row">
+					<label class="col-md-5">Código de Promoción</label>
+					<div class="col-md-7">
+						<input type="text" class="form-control" name="codigo_promocion" id="codigo_promocion" value="<?= $codigo_promocion ?>" autocomplete="off" />
+					</div>
+				</div>
+
 		</div>
 		
 		<div class="col-md-5" align="center">

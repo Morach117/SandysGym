@@ -1,10 +1,9 @@
 <?php
-    //$pag_busqueda_promociones = request_var('pag_busqueda_promociones', '');
-    //$pag_opciones_promociones = request_var('pag_opciones_promociones', 0);
 
-   // $opciones_promociones = opciones_busqueda_promociones($pag_opciones_promociones);
     $var_exito_promociones = lista_promociones();
     $paginas_promociones = paginado($var_exito_promociones['num'], 'promociones');
+    $pag_busqueda	= request_var( 'pag_busqueda', '' );
+
 ?>
 
 <div class="row">
@@ -18,19 +17,10 @@
 <hr/>
 
 <form method="post" action=".?s=<?= $seccion ?>">
-    <div class="row">
-        <label class="col-md-2">Opciones</label>
-        <div class="col-md-4">
-            <select name="pag_opciones_promociones" class="form-control">
-                <option value="">Todos...</option>
-                </select>
-        </div>
-    </div>
-
-    <div class="row">
-        <label class="col-md-2">Búsqueda</label>
-        <div class="col-md-4"><input type="text" name="pag_busqueda_promociones" class="form-control" autofocus="on" /></div>
-    </div>
+	<div class="row">
+		<label class="col-md-2">Búsqueda</label>
+		<div class="col-md-4"><input type="text" name="pag_busqueda" class="form-control" value="<?= $pag_busqueda ?>" autofocus="on" /></div>
+	</div>
 
     <div class="row">
         <div class="col-md-offset-2 col-md-4">

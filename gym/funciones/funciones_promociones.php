@@ -15,6 +15,27 @@ function validar_registro_promociones()
     return $exito;
 }
 
+
+function opciones_busqueda($default = 0)
+{
+    $busqueda = array(
+        1 => 'Promociones agregadas hoy',
+        2 => 'Promociones vigentes hoy',
+    );
+    $opc_busqueda = "";
+
+    foreach ($busqueda as $ind => $opcion) {
+        if ($default == $ind)
+            $opc_busqueda .= "<option selected value='$ind'>$opcion</option>";
+        else
+            $opc_busqueda .= "<option value='$ind'>$opcion</option>";
+    }
+
+    return $opc_busqueda;
+}
+
+
+
 function lista_promociones()
 {
     global $conexion, $gbl_paginado;
@@ -74,17 +95,26 @@ function lista_promociones()
         while ($fila = mysqli_fetch_assoc($resultado_promociones)) {
             // Obtener los códigos relacionados con la promoción actual
             $id_promocion = $fila['id_promocion'];
-            $query_codigos = "SELECT codigo_generado FROM san_codigos WHERE id_promocion = $id_promocion";
+            $query_codigos = "SELECT codigo_generado, status FROM san_codigos WHERE id_promocion = $id_promocion";
             $resultado_codigos = mysqli_query($conexion, $query_codigos);
-
+            
             // Construir la lista de códigos
             $codigos = "";
             if ($resultado_codigos) {
-                while ($codigo = mysqli_fetch_assoc($resultado_codigos)) {
-                    $codigos .= "<li>$codigo[codigo_generado]</li>";
+                while ($row = mysqli_fetch_assoc($resultado_codigos)) {
+                    $codigo = $row['codigo_generado'];
+                    $status = $row['status'];
+                    if ($status == 0) {
+                        // El código ha sido usado
+                        $codigos .= "<li>$codigo - El código ha sido usado</li>";
+                    } else {
+                        // El código está activo
+                        $codigos .= "<li>$codigo</li>";
+                    }
                 }
                 mysqli_free_result($resultado_codigos);
             }
+            
 
             // Si no hay códigos, mostrar un mensaje
             if (empty($codigos)) {
