@@ -13,6 +13,7 @@ function guardar_nueva_promocion()
     $utilizado = request_var('utilizado', '');
     $tipo_promocion = request_var('tipo_promocion', '');
     $cantidad_codigos = request_var('cantidad_codigos', '');
+    $servicios_permitidos = isset($_POST['servicios_permitidos']) ? $_POST['servicios_permitidos'] : array();
 
     // Insertar la nueva promoción en la base de datos
     $datos_sql = array(
@@ -30,6 +31,19 @@ function guardar_nueva_promocion()
 
     if ($resultado) {
         $id_promocion = mysqli_insert_id($conexion); // Obtener el ID de la promoción recién insertada
+
+        // Insertar datos en la tabla san_descuentos_promociones
+        if (is_array($servicios_permitidos)) {
+            foreach ($servicios_permitidos as $id_servicio) {
+                $query_descuentos = "INSERT INTO san_descuentos_promociones (id_promocion, id_servicio, permitir_descuento) VALUES ($id_promocion, $id_servicio, 1)";
+                $resultado_descuentos = mysqli_query($conexion, $query_descuentos);
+                if (!$resultado_descuentos) {
+                    $mensaje['num'] = 3;
+                    $mensaje['msj'] = "Error al guardar los datos de los descuentos de promoción.";
+                    return $mensaje;
+                }
+            }
+        }
 
         // Generar los códigos según el tipo de promoción
         if ($tipo_promocion == 'Individual') {
@@ -97,4 +111,5 @@ function generar_codigo_promocion()
     return $codigo;
 }
 
+// Resto del código PHP permanece igual
 ?>

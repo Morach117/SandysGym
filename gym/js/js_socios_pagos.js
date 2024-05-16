@@ -3,6 +3,7 @@ function calcular_servicio()
 	var fecha_ini		= document.getElementById( 'pag_fecha_ini' ).value;
 	var servicio		= document.getElementById( 'servicio' ).value;
 	
+	
 	//[pk de servicio en MEN PARCIAL]-[mes]
 	//
 	if( servicio == '5-1' )

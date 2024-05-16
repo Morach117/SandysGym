@@ -9,13 +9,15 @@
 <hr/>
 
 <?php
-    $titulo_promocion       = request_var('titulo_promocion', '');
-    $vigencia_inicial       = request_var('vigencia_inicial', '');
-    $vigencia_final         = request_var('vigencia_final', '');
-    $porcentaje_descuento   = request_var('porcentaje_descuento', '');
-    $utilizado              = request_var('utilizado', '');
-    $tipo_promocion         = request_var('tipo_promocion', '');
-    $cantidad_codigos       = request_var('cantidad_codigos', '');
+$titulo_promocion       = request_var('titulo_promocion', '');
+$vigencia_inicial       = request_var('vigencia_inicial', '');
+$vigencia_final         = request_var('vigencia_final', '');
+$porcentaje_descuento   = request_var('porcentaje_descuento', '');
+$utilizado              = request_var('utilizado', '');
+$tipo_promocion         = request_var('tipo_promocion', '');
+$cantidad_codigos       = request_var('cantidad_codigos', '');
+$servicios_permitidos   = isset($_POST['servicios_permitidos']) ? $_POST['servicios_permitidos'] : array();
+
     
     if ($enviar) {
         $validar = validar_registro_promociones();
@@ -86,6 +88,32 @@
         <input type="number" class="form-control" name="cantidad_codigos" min="1" max="100" value="<?= ($tipo_promocion == 'Individual') ? '1' : $cantidad_codigos ?>" />
     </div>
 </div>
+
+<div class="row">
+    <label class="col-md-2">Servicios Permitidos</label>
+    <div class="col-md-4" style="max-height: 200px; overflow-y: auto;">
+        <?php
+            // Consulta para obtener todos los servicios almacenados
+            $query = "SELECT ser_id_servicio, ser_descripcion FROM san_servicios WHERE ser_id_giro = 1 AND ser_status = 'A'";
+            $result = mysqli_query($conexion, $query);
+
+            // Verificar si la consulta fue exitosa y si hay servicios disponibles
+            if ($result && mysqli_num_rows($result) > 0) {
+                // Iterar sobre los resultados y mostrar cada servicio como una opción en el select
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $id_servicio = $row['ser_id_servicio'];
+                    $nombre_servicio = $row['ser_descripcion'];
+                    echo "<div><input type='checkbox' name='servicios_permitidos[]' value='$id_servicio'> $nombre_servicio</div>";
+                }
+            } else {
+                echo "<p>No hay servicios disponibles</p>";
+            }
+        ?>
+    </div>
+</div>
+
+
+
 
     
     <div class="row text-center">

@@ -73,6 +73,8 @@
 		list( $id_servicio, $meses ) = explode( '-', $servicio );
 		
 		$servicio_cve	= obtener_servicio( $id_servicio );
+
+		
 		$servicio_cve	= $servicio_cve['clave'];
 		
 		if( $servicio_cve == 'MEN PARCIAL' )
@@ -204,6 +206,22 @@
 					</div>
 				</div>
 
+				<div class="row">
+    <div class="col-md-12">
+        <h4 class="text-info">Detalle del Pago</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <p>Subtotal: <span id="subtotal"></span></p>
+        <p>Descuento: <span id="descuento"></span></p>
+        <p>Total: <span id="total"></span></p>
+    </div>
+</div>
+
+
+
 		</div>
 		
 		<div class="col-md-5" align="center">
@@ -276,3 +294,146 @@
 		</table>
 	</div>
 </div>
+<script>
+// Función para obtener la cuota del servicio mediante una solicitud AJAX
+function obtenerCuotaServicio() {
+    var servicioSeleccionado = document.getElementById("servicio").value;
+    var id_servicio = servicioSeleccionado.split('-')[0];
+
+    if (!id_servicio) {
+        console.error("Error: El id_servicio es inválido.");
+        return;
+    }
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var respuesta = JSON.parse(xhr.responseText);
+
+                if (respuesta.success) {
+                    var cuota = parseFloat(respuesta.cuota);
+
+                    // Mostrar la cuota sin aplicar ningún descuento
+                    document.getElementById("subtotal").textContent = cuota.toFixed(2);
+
+                    // Verificar si el cliente tiene un descuento almacenado
+                    var descuentoCliente = parseFloat(<?php echo $nombre['soc_descuento']; ?>);
+                    if (!isNaN(descuentoCliente)) {
+                        aplicarDescuentoCliente(descuentoCliente);
+                    } else {
+                        document.getElementById("descuento").textContent = '0.00';
+                        document.getElementById("total").textContent = cuota.toFixed(2);
+                    }
+                } else {
+                    console.error("Error al obtener la cuota del servicio:", respuesta.error);
+                }
+            } else {
+                console.error('Error al realizar la solicitud:', xhr.status);
+            }
+        }
+    };
+
+    xhr.open("GET", "././funciones/obtener_cuota_servicio.php?id_servicio=" + id_servicio, true);
+    xhr.send();
+}
+
+// Función para verificar si el servicio seleccionado tiene descuentos promocionales permitidos
+function verificarDescuentosPromocionales(id_servicio) {
+    var xhrDescuentos = new XMLHttpRequest();
+    xhrDescuentos.onreadystatechange = function() {
+        if (xhrDescuentos.readyState === XMLHttpRequest.DONE) {
+            if (xhrDescuentos.status === 200) {
+                var respuestaDescuentos = JSON.parse(xhrDescuentos.responseText);
+                if (!respuestaDescuentos.success) {
+                    // Mostrar una alerta si el servicio no tiene descuentos promocionales permitidos
+                    alert("El servicio seleccionado no tiene descuentos promocionales permitidos.");
+
+                    // Recargar la página después de 2 segundos
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
+                }
+            } else {
+                console.error('Error al realizar la solicitud para verificar los descuentos promocionales:', xhrDescuentos.status);
+            }
+        }
+    };
+
+    xhrDescuentos.open("GET", "././funciones/verificar_descuentos_promocionales.php?id_servicio=" + id_servicio, true);
+    xhrDescuentos.send();
+}
+
+// Función para aplicar el descuento del cliente
+function aplicarDescuentoCliente(descuentoCliente) {
+    var cuota = parseFloat(document.getElementById("subtotal").textContent);
+    var montoDescontadoCliente = cuota * (descuentoCliente / 100);
+    var totalConDescuentoCliente = cuota - montoDescontadoCliente;
+
+    // Mostrar el descuento del cliente y el total a pagar
+    document.getElementById("descuento").textContent = montoDescontadoCliente.toFixed(2);
+    document.getElementById("total").textContent = totalConDescuentoCliente.toFixed(2);
+}
+
+// Función para aplicar el descuento del código promocional
+function aplicarDescuentoPromocional(codigo_promocion) {
+    var servicioSeleccionado = document.getElementById("servicio").value;
+    var id_servicio = servicioSeleccionado.split('-')[0];
+
+    verificarDescuentosPromocionales(id_servicio); // Verificar descuentos promocionales para el nuevo servicio seleccionado
+
+    var xhrPromocion = new XMLHttpRequest();
+    xhrPromocion.onreadystatechange = function() {
+        if (xhrPromocion.readyState === XMLHttpRequest.DONE) {
+            if (xhrPromocion.status === 200) {
+                var respuestaPromocion = JSON.parse(xhrPromocion.responseText);
+                if (respuestaPromocion.success) {
+                    var descuentoPromocion = parseFloat(respuestaPromocion.porcentaje_descuento);
+                    var cuota = parseFloat(document.getElementById("subtotal").textContent);
+
+                    // Calcular el descuento total sumando el descuento del cliente y el descuento del código promocional
+                    var descuentoTotal = 0;
+
+                    // Verificar si el cliente tiene un descuento almacenado
+                    var descuentoCliente = parseFloat(<?php echo $nombre['soc_descuento']; ?>);
+                    if (!isNaN(descuentoCliente)) {
+                        descuentoTotal += descuentoCliente;
+                    }
+                    
+                    descuentoTotal += descuentoPromocion;
+
+                    var montoDescontadoTotal = cuota * (descuentoTotal / 100);
+                    var totalConDescuentoTotal = cuota - montoDescontadoTotal;
+
+                    // Mostrar el descuento total y el total a pagar
+                    document.getElementById("descuento").textContent = montoDescontadoTotal.toFixed(2);
+                    document.getElementById("total").textContent = totalConDescuentoTotal.toFixed(2);
+                } else {
+                    alert("Error: " + respuestaPromocion.error);
+                }
+            } else {
+                console.error('Error al realizar la solicitud para verificar el código promocional:', xhrPromocion.status);
+            }
+        }
+    };
+
+    xhrPromocion.open("GET", "././funciones/verificar_codigo_promocional.php?codigo_promocion=" + codigo_promocion, true);
+    xhrPromocion.send();
+}
+
+// Llamar a la función inicialmente para que se muestre el total correcto al cargar la página
+obtenerCuotaServicio();
+
+// Agregar un evento onchange al select de servicio para llamar a la función obtenerCuotaServicio() cuando cambie
+document.getElementById("servicio").onchange = obtenerCuotaServicio;
+
+// Agregar un evento onchange al campo de código promocional
+document.getElementById("codigo_promocion").onchange = function() {
+    var codigo_promocion = this.value;
+    if (codigo_promocion) {
+        aplicarDescuentoPromocional(codigo_promocion);
+    }
+};
+</script>
+
