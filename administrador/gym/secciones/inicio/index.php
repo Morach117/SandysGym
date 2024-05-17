@@ -23,5 +23,13 @@
 				<span class="touch-class">Opciones para catalogos</span>
 			</li>
 		</a>
+
+        <a href=".?s=cumple">
+			<li>
+				<span class="glyphicon glyphicon-gift"></span>
+				<h5><strong>Cumpleaños</strong></h5>
+				<span class="touch-class">Opciones para cumpleaños</span>
+			</li>
+		</a>
 	</ul>
 </div>
