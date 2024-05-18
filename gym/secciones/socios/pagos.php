@@ -294,7 +294,13 @@
 		</table>
 	</div>
 </div>
+
+
+
 <script>
+// Bandera para verificar si ya se ha aplicado el descuento de cumpleaños
+var descuentoCumpleanosAplicado = false;
+
 // Función para obtener la cuota del servicio mediante una solicitud AJAX
 function obtenerCuotaServicio() {
     var servicioSeleccionado = document.getElementById("servicio").value;
@@ -318,13 +324,19 @@ function obtenerCuotaServicio() {
                     // Mostrar la cuota sin aplicar ningún descuento
                     document.getElementById("subtotal").textContent = cuota.toFixed(2);
 
-                    // Verificar si el cliente tiene un descuento almacenado
-                    var descuentoCliente = parseFloat(<?php echo $nombre['soc_descuento']; ?>);
-                    if (!isNaN(descuentoCliente)) {
-                        aplicarDescuentoCliente(descuentoCliente);
-                    } else {
-                        document.getElementById("descuento").textContent = '0.00';
-                        document.getElementById("total").textContent = cuota.toFixed(2);
+                    // Verificar si es el mes de cumpleaños del cliente
+                    verificarCumpleanos();
+
+                    // Si no es el mes de cumpleaños, verificar y aplicar otros descuentos
+                    if (!descuentoCumpleanosAplicado) {
+                        // Verificar si el cliente tiene un descuento almacenado
+                        var descuentoCliente = parseFloat(<?= json_encode($nombre['soc_descuento']); ?>);
+                        if (!isNaN(descuentoCliente)) {
+                            aplicarDescuentoCliente(descuentoCliente);
+                        } else {
+                            document.getElementById("descuento").textContent = '0.00';
+                            document.getElementById("total").textContent = cuota.toFixed(2);
+                        }
                     }
                 } else {
                     console.error("Error al obtener la cuota del servicio:", respuesta.error);
@@ -341,6 +353,8 @@ function obtenerCuotaServicio() {
 
 // Función para verificar si el servicio seleccionado tiene descuentos promocionales permitidos
 function verificarDescuentosPromocionales(id_servicio) {
+    if (descuentoCumpleanosAplicado) return;
+
     var xhrDescuentos = new XMLHttpRequest();
     xhrDescuentos.onreadystatechange = function() {
         if (xhrDescuentos.readyState === XMLHttpRequest.DONE) {
@@ -367,6 +381,8 @@ function verificarDescuentosPromocionales(id_servicio) {
 
 // Función para aplicar el descuento del cliente
 function aplicarDescuentoCliente(descuentoCliente) {
+    if (descuentoCumpleanosAplicado) return;
+
     var cuota = parseFloat(document.getElementById("subtotal").textContent);
     var montoDescontadoCliente = cuota * (descuentoCliente / 100);
     var totalConDescuentoCliente = cuota - montoDescontadoCliente;
@@ -378,6 +394,8 @@ function aplicarDescuentoCliente(descuentoCliente) {
 
 // Función para aplicar el descuento del código promocional
 function aplicarDescuentoPromocional(codigo_promocion) {
+    if (descuentoCumpleanosAplicado) return;
+
     var servicioSeleccionado = document.getElementById("servicio").value;
     var id_servicio = servicioSeleccionado.split('-')[0];
 
@@ -396,7 +414,7 @@ function aplicarDescuentoPromocional(codigo_promocion) {
                     var descuentoTotal = 0;
 
                     // Verificar si el cliente tiene un descuento almacenado
-                    var descuentoCliente = parseFloat(<?php echo $nombre['soc_descuento']; ?>);
+                    var descuentoCliente = parseFloat(<?= json_encode($nombre['soc_descuento']); ?>);
                     if (!isNaN(descuentoCliente)) {
                         descuentoTotal += descuentoCliente;
                     }
@@ -420,6 +438,29 @@ function aplicarDescuentoPromocional(codigo_promocion) {
 
     xhrPromocion.open("GET", "././funciones/verificar_codigo_promocional.php?codigo_promocion=" + codigo_promocion, true);
     xhrPromocion.send();
+}
+
+// Función para verificar si el cliente cumple años este mes
+function verificarCumpleanos() {
+    console.log("Verificando cumpleaños del cliente...");
+
+    var fechaNacimientoString = "<?= $nombre['soc_fecha_nacimiento']; ?>";
+    console.log("Fecha de nacimiento (string):", fechaNacimientoString);
+
+    var fechaNacimiento = new Date(fechaNacimientoString + "T00:00:00");
+    console.log("Fecha de nacimiento (Date):", fechaNacimiento);
+
+    var fechaActual = new Date();
+    console.log("Fecha actual:", fechaActual);
+
+    if (fechaNacimiento.getMonth() === fechaActual.getMonth()) {
+        alert("¡Feliz cumpleaños! Tienes un descuento especial.");
+        document.getElementById("codigo_promocion").value = "89T76V68";
+        aplicarDescuentoPromocional("89T76V68");
+        descuentoCumpleanosAplicado = true; // Marcar que se ha aplicado el descuento de cumpleaños
+    } else {
+        console.log("No es el mes de cumpleaños del cliente.");
+    }
 }
 
 // Llamar a la función inicialmente para que se muestre el total correcto al cargar la página
