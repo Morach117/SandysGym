@@ -102,16 +102,19 @@
     </div>
     
     <div class="row">
-        <label class="col-md-2">Descuento (%)</label>
-        <div class="col-md-4">
-            <input type="number" class="form-control" name="soc_descuento" min="0" max="100" value="<?= $datos['soc_descuento'] ?>" />
-        </div>
-
-        <label class="col-md-2">Fecha de Nacimiento <span class="text-danger">*</span></label>
-        <div class="col-md-4">
-            <input type="date" class="form-control" name="soc_fecha_nacimiento" required="required" value="<?= $datos['soc_fecha_nacimiento'] ?>" />
-        </div>
+    <label class="col-md-2" <?php if ($_SESSION['sans_rol'] != 'S') echo 'style="display: none;"'; ?>>Descuento (%)</label>
+    <div class="col-md-4">
+        <input type="number" class="form-control" name="soc_descuento" min="0" max="100" value="<?= $soc_descuento ?>" <?php if ($_SESSION['sans_rol'] != 'S') echo 'style="display: none;"'; ?> />
     </div>
+</div>
+
+<div class="row">
+    <label class="col-md-2">Fecha de Nacimiento <span class="text-danger">*</span></label>
+    <div class="col-md-4">
+        <input type="date" class="form-control" name="soc_fecha_nacimiento" required="required" value="<?= $datos['soc_fecha_nacimiento'] ?>" />
+    </div>
+</div>
+
     
     <div class="row">
         <div class="col-md-12">

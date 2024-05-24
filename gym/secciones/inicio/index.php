@@ -78,13 +78,7 @@
 				<span class="touch-class">Retiro de efectivo de la venta</span>
 			</li>
 		</a>
-		<a href=".?s=promociones">
-    <li>
-        <span class="glyphicon glyphicon-gift"></span>
-        <h5><strong>Promociones</strong></h5>
-        <span class="touch-class">Ver promociones disponibles</span>
-    </li>
-</a>
+
 
 		
 		<?= $m_cambio ?>

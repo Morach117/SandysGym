@@ -31,5 +31,13 @@
 				<span class="touch-class">Opciones para cumpleaños</span>
 			</li>
 		</a>
+		<a href=".?s=promociones">
+    <li>
+        <span class="glyphicon glyphicon-gift"></span>
+        <h5><strong>Promociones</strong></h5>
+        <span class="touch-class">Ver promociones disponibles</span>
+    </li>
+</a>
+		
 	</ul>
 </div>

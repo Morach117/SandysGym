@@ -7,4 +7,5 @@
 	<a class="list-group-item" href=".?s=reportes"><span class="glyphicon glyphicon-list-alt"></span> Reportes</a>
 	<a class="list-group-item" href=".?s=catalogos"><span class="glyphicon glyphicon-list"></span> Catalogos</a>
 	<a class="list-group-item" href=".?s=cumple"><span class="glyphicon glyphicon-gift"></span> Cumpleaños</a>
+	<a class="list-group-item" href=".?s=promociones"><span class="glyphicon glyphicon-tags"></span> Promociones</a>
 </div>
