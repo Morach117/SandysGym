@@ -24,8 +24,13 @@
             'soc_id_empresa'        => $id_empresa,
             'soc_id_consorcio'      => $id_consorcio
         );
-        
-        if (!existe_correo_socio($correo, 'socios')) {
+
+        // Verificar si el correo ya existe en la base de datos
+        $correo_query = "SELECT COUNT(*) as total FROM san_socios WHERE soc_correo = '" . mysqli_real_escape_string($conexion, $correo) . "'";
+        $correo_resultado = mysqli_query($conexion, $correo_query);
+        $correo_fila = mysqli_fetch_assoc($correo_resultado);
+
+        if ($correo_fila['total'] == 0) {
             $query      = construir_insert('san_socios', $datos_sql);
             $resultado  = mysqli_query($conexion, $query);
             
