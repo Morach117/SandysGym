@@ -86,168 +86,162 @@
 	}
 	
 	function lista_socios()
-	{
-		Global $conexion, $id_empresa, $gbl_paginado;
-		
-		$pag_busqueda	= request_var( 'pag_busqueda', '' );
-		$pag_opciones	= request_var( 'pag_opciones', 0 );
-		
-		$datos		= "";
-		$pagina		= ( request_var( 'pag', 1 ) - 1 ) * $gbl_paginado;
-		$fecha_mov	= date( 'Y-m-d' );
-		$colspan	= 6;
-		$var_total	= 0;
-		$var_exito	= array();
-		
-		//para el paginado
-		
-		$pag_bloque	= request_var( 'blq', 0 );
-		$pag_pag	= request_var( 'pag', 0 );
-		
-		$parametros	= "";
-		
-		if( $pag_opciones )
-			$parametros .= "&pag_opciones=$pag_opciones";
-		
-		if( $pag_busqueda )
-			$parametros .= "&pag_busqueda=$pag_busqueda";
-		
-		if( $pag_bloque )
-			$parametros .= "&blq=$pag_bloque";
-		
-		if( $pag_pag )
-			$parametros .= "&pag=$pag_pag";
-		
-		//querys
-		
-		if( $pag_busqueda )
-		{
-			$limite		= 'LIMIT 0, 50';
-			$condicion	= "AND	(
-									LOWER( CONCAT( soc_apepat, ' ', soc_apemat, ' ', soc_nombres ) ) LIKE LOWER( '%$pag_busqueda%' )
-								)";
-		}
-		else
-		{
-			$limite		= "LIMIT $pagina, $gbl_paginado";
-			$condicion	= "";
-		}
-		
-		if( $pag_opciones == 1 )
-			$condicion .= " AND DATE_FORMAT( soc_fecha_captura, '%Y-%m-%d' ) = '$fecha_mov' ";
-		
-		if( $pag_opciones == 2 )
-			$condicion .= " AND DATE_FORMAT( pag_fecha_pago, '%Y-%m-%d' ) = '$fecha_mov' ";
-		
-		if( $pag_opciones == 3 )
-			$condicion .= " AND DATE_FORMAT( pag_fecha_fin, '%Y-%m-%d' ) = '$fecha_mov' ";
-		
-		/*este query se usa para saber el total de filas para el PAGINADO, AMBOS DEBEN SER IGUALITOS EN WHERE*/
-		$query		= "	SELECT 		COUNT(*) AS total
-						FROM 		san_socios
-						LEFT JOIN	san_pagos ON pag_id_socio = soc_id_socio
-						AND			pag_fecha_fin = ( 	SELECT		pag_fecha_fin
-														FROM		san_pagos
-														WHERE		pag_id_socio = soc_id_socio
-														AND			'$fecha_mov' <= pag_fecha_fin 
-														AND			pag_status = 'A'
-														ORDER BY	pag_fecha_fin DESC 
-														LIMIT		0, 1 )
-						AND			pag_status = 'A'
-						WHERE		soc_id_empresa = $id_empresa
-									$condicion
-						GROUP BY	soc_id_socio";
-		
-		$resultado	= mysqli_query( $conexion, $query );
-		
-		if( $resultado )
-			$var_total = mysqli_num_rows( $resultado );
-		
-		mysqli_free_result( $resultado );
-		
-		/*este query es de datos AMBOS DEBEN SER IGUALITOS EN WHERE*/
-		$query		= "	SELECT 		soc_id_socio AS id_socio,
-									pag_id_pago AS id_pago,
-									CONCAT( soc_apepat, ' ', soc_apemat, ' ', soc_nombres ) AS nombres,
-									IF( pag_id_pago > 0, CONCAT( DATE_FORMAT( pag_fecha_ini, '%d-%m-%Y' ), ' al ', DATE_FORMAT( pag_fecha_fin, '%d-%m-%Y' ) ), 'Pago Vencido' ) AS status_pago
-						FROM 		san_socios
-						LEFT JOIN	san_pagos ON pag_id_socio = soc_id_socio
-						AND			pag_fecha_fin = ( 	SELECT		pag_fecha_fin
-														FROM		san_pagos
-														WHERE		pag_id_socio = soc_id_socio
-														AND			'$fecha_mov' <= pag_fecha_fin 
-														AND			pag_status = 'A'
-														ORDER BY	pag_fecha_fin DESC 
-														LIMIT		0, 1 )
-						AND			pag_status = 'A'
-						WHERE		soc_id_empresa = $id_empresa
-									$condicion
-						GROUP BY	soc_id_socio
-						ORDER BY	pag_fecha_fin DESC,
-									nombres
-									$limite";
-		
-		$resultado	= mysqli_query( $conexion, $query );
-		
-		if( $resultado )
-		{
-			$i = 1;
-			while( $fila = mysqli_fetch_assoc( $resultado ) )
-			{
-				if( file_exists( "../imagenes/avatar/$fila[id_socio].jpg" ) )
-					$fotografia	= "<img src='../imagenes/avatar/$fila[id_socio].jpg' class='img-responsive' width='40px' />";
-				else
-					$fotografia	= "<img src='../imagenes/avatar/noavatar.jpg' class='img-responsive' width='40px' />";
-				
-				$datos	.= "<tr>
-								<td>".( $pagina + $i )."</td>
-								<td>
-									<div class='btn-group'>
-										<a class='pointer' dropdown-toggle' data-toggle='dropdown'>
-											<span class='glyphicon glyphicon-chevron-down'></span>
-										</a>
-										<ul class='dropdown-menu'>
-											<li>
-												<a href='.?s=socios&i=datosg&id_socio=$fila[id_socio]'><span class='glyphicon glyphicon-edit'></span> Actualizar información</a>
-											</li>
-											
-											<li>
-												<a href='.?s=socios&i=pagos&id_socio=$fila[id_socio]$parametros'><span class='glyphicon glyphicon-usd'></span> Pago de Cuotas</a>
-											</li>
-											
-											<li>
-												<a href='.?s=socios&i=fotografia&id_socio=$fila[id_socio]'><span class='glyphicon glyphicon-picture'></span> Fotografía</a>
-											</li>
-											
-											<li>
-												<a href='.?s=socios&i=fechas&id_socio=$fila[id_socio]&id_pago=$fila[id_pago]'><span class='glyphicon glyphicon-calendar'></span> Cambio de Fechas</a>
-											</li>
-											
-											<li>
-												<a href='.?s=socios&i=eliminar&id_socio=$fila[id_socio]'><span class='glyphicon glyphicon-remove'></span> Eliminar</a>
-											</li>
-										</ul>
-									</div>
-								</td>
-								<td>$fila[id_socio]</td>
-								<td>$fila[nombres]</td>
-								<td>$fila[status_pago]</td>
-								<td><a href='.?s=socios&i=fotografia&id_socio=$fila[id_socio]'>$fotografia</span></a></td>
-							</tr>";
-				$i++;
-			}
-		}
-		else
-			$datos	= "	<tr><td colspan='$colspan'>Ocurrió un problema al obtener los datos. ".mysqli_error( $conexion )."</td></tr>";
-		
-		if( !$datos )
-			$datos	= "	<tr><td colspan='$colspan'>No hay datos.</td></tr>";
-		
-		$var_exito['num'] = $var_total;
-		$var_exito['msj'] = $datos;
-		
-		return $var_exito;
-	}
+{
+    global $conexion, $id_empresa, $gbl_paginado;
+    
+    $pag_busqueda = request_var('pag_busqueda', '');
+    $pag_opciones = request_var('pag_opciones', 0);
+    
+    $datos      = "";
+    $pagina     = (request_var('pag', 1) - 1) * $gbl_paginado;
+    $fecha_mov  = date('Y-m-d');
+    $colspan    = 8; // Updated colspan to accommodate new columns
+    $var_total  = 0;
+    $var_exito  = array();
+    
+    // Parameters for pagination
+    $pag_bloque = request_var('blq', 0);
+    $pag_pag    = request_var('pag', 0);
+    
+    $parametros = "";
+    
+    if ($pag_opciones)
+        $parametros .= "&pag_opciones=$pag_opciones";
+    
+    if ($pag_busqueda)
+        $parametros .= "&pag_busqueda=$pag_busqueda";
+    
+    if ($pag_bloque)
+        $parametros .= "&blq=$pag_bloque";
+    
+    if ($pag_pag)
+        $parametros .= "&pag=$pag_pag";
+    
+    // Queries
+    if ($pag_busqueda) {
+        $limite     = 'LIMIT 0, 50';
+        $condicion  = "AND (LOWER(CONCAT(soc_apepat, ' ', soc_apemat, ' ', soc_nombres)) LIKE LOWER('%$pag_busqueda%'))";
+    } else {
+        $limite     = "LIMIT $pagina, $gbl_paginado";
+        $condicion  = "";
+    }
+    
+    if ($pag_opciones == 1)
+        $condicion .= " AND DATE_FORMAT(soc_fecha_captura, '%Y-%m-%d') = '$fecha_mov' ";
+    
+    if ($pag_opciones == 2)
+        $condicion .= " AND DATE_FORMAT(pag_fecha_pago, '%Y-%m-%d') = '$fecha_mov' ";
+    
+    if ($pag_opciones == 3)
+        $condicion .= " AND DATE_FORMAT(pag_fecha_fin, '%Y-%m-%d') = '$fecha_mov' ";
+    
+    // Query for pagination count
+    $query      = "SELECT COUNT(*) AS total
+                   FROM san_socios
+                   LEFT JOIN san_pagos ON pag_id_socio = soc_id_socio
+                   AND pag_fecha_fin = (SELECT pag_fecha_fin
+                                        FROM san_pagos
+                                        WHERE pag_id_socio = soc_id_socio
+                                        AND '$fecha_mov' <= pag_fecha_fin 
+                                        AND pag_status = 'A'
+                                        ORDER BY pag_fecha_fin DESC 
+                                        LIMIT 0, 1)
+                   AND pag_status = 'A'
+                   WHERE soc_id_empresa = $id_empresa
+                   $condicion
+                   GROUP BY soc_id_socio";
+    
+    $resultado = mysqli_query($conexion, $query);
+    
+    if ($resultado)
+        $var_total = mysqli_num_rows($resultado);
+    
+    mysqli_free_result($resultado);
+    
+    // Query for data retrieval
+    $query      = "SELECT soc_id_socio AS id_socio,
+                          pag_id_pago AS id_pago,
+                          CONCAT(soc_apepat, ' ', soc_apemat, ' ', soc_nombres) AS nombres,
+                          soc_correo,
+                          DATE_FORMAT(soc_fecha_nacimiento, '%d-%m-%Y') AS fecha_nacimiento,
+                          IF(pag_id_pago > 0, CONCAT(DATE_FORMAT(pag_fecha_ini, '%d-%m-%Y'), ' al ', DATE_FORMAT(pag_fecha_fin, '%d-%m-%Y')), 'Pago Vencido') AS status_pago
+                   FROM san_socios
+                   LEFT JOIN san_pagos ON pag_id_socio = soc_id_socio
+                   AND pag_fecha_fin = (SELECT pag_fecha_fin
+                                        FROM san_pagos
+                                        WHERE pag_id_socio = soc_id_socio
+                                        AND '$fecha_mov' <= pag_fecha_fin 
+                                        AND pag_status = 'A'
+                                        ORDER BY pag_fecha_fin DESC 
+                                        LIMIT 0, 1)
+                   AND pag_status = 'A'
+                   WHERE soc_id_empresa = $id_empresa
+                   $condicion
+                   GROUP BY soc_id_socio
+                   ORDER BY pag_fecha_fin DESC, nombres
+                   $limite";
+    
+    $resultado = mysqli_query($conexion, $query);
+    
+    if ($resultado) {
+        $i = 1;
+        while ($fila = mysqli_fetch_assoc($resultado)) {
+            if (file_exists("../imagenes/avatar/$fila[id_socio].jpg"))
+                $fotografia = "<img src='../imagenes/avatar/$fila[id_socio].jpg' class='img-responsive' width='40px' />";
+            else
+                $fotografia = "<img src='../imagenes/avatar/noavatar.jpg' class='img-responsive' width='40px' />";
+            
+            $datos .= "<tr>
+                           <td>" . ($pagina + $i) . "</td>
+                           <td>
+                               <div class='btn-group'>
+                                   <a class='pointer' dropdown-toggle' data-toggle='dropdown'>
+                                       <span class='glyphicon glyphicon-chevron-down'></span>
+                                   </a>
+                                   <ul class='dropdown-menu'>
+                                       <li>
+                                           <a href='.?s=socios&i=datosg&id_socio=$fila[id_socio]'><span class='glyphicon glyphicon-edit'></span> Actualizar información</a>
+                                       </li>
+                                       
+                                       <li>
+                                           <a href='.?s=socios&i=pagos&id_socio=$fila[id_socio]$parametros'><span class='glyphicon glyphicon-usd'></span> Pago de Cuotas</a>
+                                       </li>
+                                       
+                                       <li>
+                                           <a href='.?s=socios&i=fotografia&id_socio=$fila[id_socio]'><span class='glyphicon glyphicon-picture'></span> Fotografía</a>
+                                       </li>
+                                       
+                                       <li>
+                                           <a href='.?s=socios&i=fechas&id_socio=$fila[id_socio]&id_pago=$fila[id_pago]'><span class='glyphicon glyphicon-calendar'></span> Cambio de Fechas</a>
+                                       </li>
+                                       
+                                       <li>
+                                           <a href='.?s=socios&i=eliminar&id_socio=$fila[id_socio]'><span class='glyphicon glyphicon-remove'></span> Eliminar</a>
+                                       </li>
+                                   </ul>
+                               </div>
+                           </td>
+                           <td>$fila[id_socio]</td>
+                           <td>$fila[nombres]</td>
+                           <td>$fila[soc_correo]</td>
+                           <td>$fila[fecha_nacimiento]</td>
+                           <td>$fila[status_pago]</td>
+                           <td><a href='.?s=socios&i=fotografia&id_socio=$fila[id_socio]'>$fotografia</span></a></td>
+                       </tr>";
+            $i++;
+        }
+    } else
+        $datos = "<tr><td colspan='$colspan'>Ocurrió un problema al obtener los datos. " . mysqli_error($conexion) . "</td></tr>";
+    
+    if (!$datos)
+        $datos = "<tr><td colspan='$colspan'>No hay datos.</td></tr>";
+    
+    $var_exito['num'] = $var_total;
+    $var_exito['msj'] = $datos;
+    
+    return $var_exito;
+}
+
 	
 	function obtener_socios_vigencia_rango( $rango_ini, $rango_fin, $pag_busqueda )
 	{

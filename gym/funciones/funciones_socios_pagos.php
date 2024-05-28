@@ -131,86 +131,75 @@ function obtener_servicios($default = '')
 		$id_socio = request_var('id_socio', 0);
 		$codigo_promocion = isset($_POST['codigo_promocion']) ? $_POST['codigo_promocion'] : ''; // Obtener el código de promoción proporcionado por el usuario
 	
-		// Realizar la consulta para verificar si hay descuentos promocionales permitidos para el servicio
-		$query = "SELECT * FROM san_descuentos_promociones WHERE id_servicio = $id_servicio";
-		
-		// Ejecutar la consulta
-		$result = mysqli_query($conexion, $query);
-		
-		// Verificar si hay algún resultado
-		if ($result && mysqli_num_rows($result) > 0) {
-			// Si hay resultados, significa que el servicio tiene descuentos promocionales permitidos
+		$v_porcentaje_comision = request_var('comision', 0.0);
+		$v_metodo_pago = request_var('m_pago', ''); // E-T
 	
-			// Obtener el descuento del socio desde la tabla de socios
-			$query_descuento = "SELECT soc_descuento FROM san_socios WHERE soc_id_socio = $id_socio";
-			$resultado_descuento = mysqli_query($conexion, $query_descuento);
-			$fila_descuento = mysqli_fetch_assoc($resultado_descuento);
-			$descuento = isset($fila_descuento['soc_descuento']) ? floatval($fila_descuento['soc_descuento']) : 0.0;
+		$v_pag_efectivo = 0;
+		$v_pag_tarjeta = 0;
+		$v_monto_comision = 0;
 	
-			$v_porcentaje_comision = request_var('comision', 0.0);
-			$v_metodo_pago = request_var('m_pago', ''); // E-T
+		if ($pag_fecha_ini && $pag_fecha_fin) {
+			if ($id_servicio && $meses && $id_socio) {
+				$servicio = obtener_servicio($id_servicio);
 	
-			$v_pag_efectivo = 0;
-			$v_pag_tarjeta = 0;
-			$v_monto_comision = 0;
+				if ($servicio) {
+					if (($servicio['clave'] == 'MEN PARCIAL' && $importe >= 0) || $servicio['clave'] != 'MEN PARCIAL') {
+						if ($servicio['clave'] != 'MEN PARCIAL') {
+							$importe = $servicio['cuota'];
+						}
 	
-			if ($pag_fecha_ini && $pag_fecha_fin) {
-				if ($id_servicio && $meses && $id_socio) {
-					$servicio = obtener_servicio($id_servicio);
+						// Aquí permitimos importe de 0
+						if ($importe >= 0) {
+							$descuento = 0.0;
 	
-					if ($servicio) {
-						if (($servicio['clave'] == 'MEN PARCIAL' && $importe) || $servicio['clave'] != 'MEN PARCIAL') {
-							if ($servicio['clave'] != 'MEN PARCIAL') {
-								$importe = $servicio['cuota'];
+							// Verificar si se proporcionó un código de promoción
+							if (!empty($codigo_promocion)) {
+								$current_date = date("Y-m-d");
+								$query_validar_codigo = "SELECT p.porcentaje_descuento, p.tipo_promocion, c.status
+														FROM san_codigos c
+														INNER JOIN san_promociones p ON c.id_promocion = p.id_promocion
+														WHERE c.codigo_generado = '$codigo_promocion' 
+														AND c.status = '1' 
+														AND p.vigencia_inicial <= '$current_date' 
+														AND p.vigencia_final >= '$current_date'";
+								$resultado_validar_codigo = mysqli_query($conexion, $query_validar_codigo);
+	
+								if (mysqli_num_rows($resultado_validar_codigo) > 0) {
+									$fila_promocion = mysqli_fetch_assoc($resultado_validar_codigo);
+									$porcentaje_descuento = $fila_promocion['porcentaje_descuento'];
+									$tipo_promocion = $fila_promocion['tipo_promocion'];
+									$status = $fila_promocion['status'];
+	
+									// Verificar si el tipo de promoción es "individual" y el estado es activo
+									if ($tipo_promocion == 'Individual' && $status == '1') {
+										// Cambiar el estado del código de promoción a utilizado
+										$query_actualizar_codigo = "UPDATE san_codigos SET status = '0' WHERE codigo_generado = '$codigo_promocion'";
+										mysqli_query($conexion, $query_actualizar_codigo);
+									}
+	
+									$descuento += $porcentaje_descuento; // Sumar el descuento de la promoción
+								} else {
+									$exito['num'] = 9;
+									$exito['msj'] = "El código de promoción proporcionado no es válido o ya ha sido utilizado.";
+									return $exito;
+								}
 							}
 	
-							if ($importe > 0) {
-								// Verificar si se proporcionó un código de promoción y si está activo
-								if (!empty($codigo_promocion)) {
-									$current_date = date("Y-m-d");
-									$query_validar_codigo = "SELECT p.porcentaje_descuento, p.tipo_promocion, c.status
-																FROM san_codigos c
-																INNER JOIN san_promociones p ON c.id_promocion = p.id_promocion
-																WHERE c.codigo_generado = '$codigo_promocion' 
-																AND c.status = '1' 
-																AND p.vigencia_inicial <= '$current_date' 
-																AND p.vigencia_final >= '$current_date'";
-									$resultado_validar_codigo = mysqli_query($conexion, $query_validar_codigo);
+							// Obtener el descuento del socio desde la tabla de socios
+							$query_descuento = "SELECT soc_descuento FROM san_socios WHERE soc_id_socio = $id_socio";
+							$resultado_descuento = mysqli_query($conexion, $query_descuento);
+							$fila_descuento = mysqli_fetch_assoc($resultado_descuento);
+							$descuento += isset($fila_descuento['soc_descuento']) ? floatval($fila_descuento['soc_descuento']) : 0.0;
 	
-									if (mysqli_num_rows($resultado_validar_codigo) > 0) {
-										$fila_promocion = mysqli_fetch_assoc($resultado_validar_codigo);
-										$porcentaje_descuento = $fila_promocion['porcentaje_descuento'];
-										$tipo_promocion = $fila_promocion['tipo_promocion'];
-										$status = $fila_promocion['status'];
+							$importe_con_descuento = $importe * (1 - $descuento / 100);
 	
-										// Verificar si el tipo de promoción es "individual" y el estado es activo
-										if ($tipo_promocion == 'Individual' && $status == '1') {
-											// Cambiar el estado del código de promoción a utilizado
-											$query_actualizar_codigo = "UPDATE san_codigos SET status = '0' WHERE codigo_generado = '$codigo_promocion'";
-											mysqli_query($conexion, $query_actualizar_codigo);
-										}
+							if ($v_metodo_pago == 'E') {
+								$v_pag_efectivo = $importe_con_descuento;
+							} else {
+								$v_pag_tarjeta = $importe_con_descuento;
 	
-										// Aplicar descuento si está presente
-										$descuento += $porcentaje_descuento; // Sumar el descuento de la promoción al descuento del socio
-									} else {
-										// Código de promoción no válido
-										$exito['num'] = 9;
-										$exito['msj'] = "El código de promoción proporcionado no es válido o ya ha sido utilizado.";
-										return $exito;
-									}
-								}
-	
-								// Aplicar descuento si está presente
-								$importe_con_descuento = $importe * (1 - $descuento / 100);
-	
-								if ($v_metodo_pago == 'E') {
-									$v_pag_efectivo = $importe_con_descuento;
-								} else {
-									$v_pag_tarjeta = $importe_con_descuento;
-	
-									if ($v_porcentaje_comision > 0) {
-										$v_monto_comision = $importe_con_descuento * ($v_porcentaje_comision / 100);
-									}
+								if ($v_porcentaje_comision > 0) {
+									$v_monto_comision = $importe_con_descuento * ($v_porcentaje_comision / 100);
 								}
 							}
 	
@@ -249,7 +238,7 @@ function obtener_servicios($default = '')
 							}
 						} else {
 							$exito['num'] = 6;
-							$exito['msj'] = "No se puede obtener el importe del servicio seleccionado.";
+							$exito['msj'] = "El importe del servicio seleccionado es inválido.";
 						}
 					} else {
 						$exito['num'] = 5;
@@ -264,13 +253,14 @@ function obtener_servicios($default = '')
 				$exito['msj'] = "Faltan datos importantes para guardar el pago.";
 			}
 		} else {
-			// Si no hay resultados, el servicio no tiene descuentos promocionales permitidos
-			$exito['num'] = 10;
-			$exito['msj'] = "El servicio seleccionado no tiene descuentos promocionales permitidos.";
+			$exito['num'] = 2;
+			$exito['msj'] = "Las fechas de inicio y fin son obligatorias.";
 		}
 	
 		return $exito;
 	}
+	
+	
 	
 	
 	

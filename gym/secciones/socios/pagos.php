@@ -455,8 +455,8 @@ function verificarCumpleanos() {
 
     if (fechaNacimiento.getMonth() === fechaActual.getMonth()) {
         alert("¡Feliz cumpleaños! Tienes un descuento especial.");
-        document.getElementById("codigo_promocion").value = "89T76V68";
-        aplicarDescuentoPromocional("89T76V68");
+        document.getElementById("codigo_promocion").value = "79T95i85";
+        aplicarDescuentoPromocional("79T95i85");
         descuentoCumpleanosAplicado = true; // Marcar que se ha aplicado el descuento de cumpleaños
     } else {
         console.log("No es el mes de cumpleaños del cliente.");

@@ -69,7 +69,6 @@
 							<li class="<?= ( $seccion == 'visitas' ) ? 'active':'' ?>"><a href=".?s=visitas"><span class="glyphicon glyphicon-time"></span> Visitas</a></li>
 							<li class="<?= ( $seccion == 'venta' ) ? 'active':'' ?>"><a href=".?s=venta"><span class="glyphicon glyphicon-shopping-cart"></span> Venta</a></li>
 							<li class="<?= ( $seccion == 'prepagos' ) ? 'active':'' ?>"><a href=".?s=prepagos"><span class="glyphicon glyphicon-usd"></span> Prepagos</a></li>
-							<li class="<?= ( $seccion == 'promociones' ) ? 'active':'' ?>"><a href=".?s=promociones"><span class="glyphicon glyphicon-gift"></span> Promociones</a></li>
 						</ul>
 						
 						<ul class="nav navbar-nav navbar-right">
