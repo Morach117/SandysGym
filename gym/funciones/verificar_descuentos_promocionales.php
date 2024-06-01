@@ -22,11 +22,22 @@ if ($id_servicio) {
             'success' => true
         );
     } else {
-        // Si no hay resultados, el servicio no tiene descuentos promocionales permitidos
-        $response = array(
-            'success' => false,
-            'error' => 'El servicio seleccionado no tiene descuentos promocionales permitidos.'
-        );
+        // Verificar si el ID del servicio es 125 o 126 y está en la tabla san_servicios
+        $query_check = "SELECT * FROM san_servicios WHERE ser_id_servicio IN (125, 126) AND ser_id_servicio = $id_servicio";
+        $result_check = mysqli_query($conexion, $query_check);
+
+        if ($result_check && mysqli_num_rows($result_check) > 0) {
+            // Si el ID es 125 o 126 y está en la tabla san_servicios, permitir el descuento
+            $response = array(
+                'success' => true
+            );
+        } else {
+            // Si no hay resultados y el ID no es 125 ni 126, el servicio no tiene descuentos promocionales permitidos
+            $response = array(
+                'success' => false,
+                'error' => 'El servicio seleccionado no tiene descuentos promocionales permitidos.'
+            );
+        }
     }
 } else {
     // Si no se proporcionó el ID del servicio, devolver un error
