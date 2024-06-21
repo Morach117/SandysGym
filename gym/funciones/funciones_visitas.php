@@ -120,7 +120,6 @@
 	{
 		$validar	= array
 		(
-			'hor_genero'		=> array( 'tipo' => 'T',	'max' => 8,		'req' => 'S',	'for' => '',	'txt' => 'Sexo'),
 			'hor_nombre'		=> array( 'tipo' => 'T',	'max' => 50,	'req' => 'S',	'for' => '',	'txt' => 'Nombre')
 		);
 		

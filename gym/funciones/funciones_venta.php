@@ -209,7 +209,7 @@
 	{
 		global $conexion, $id_empresa;
 		
-		$query		= "SELECT prep_saldo AS saldo FROM san_prepago WHERE prep_id_prepago = $id_prepago AND prep_id_empresa = $id_empresa";
+		$query = "SELECT soc_mon_saldo AS saldo FROM san_socios WHERE soc_id_socio = $id_socio AND soc_id_empresa = $id_empresa";
 		$resultado	= mysqli_query( $conexion, $query );
 		
 		if( $resultado )

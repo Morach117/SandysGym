@@ -1,0 +1,792 @@
+2024-06-17 23:58:35 [2] SERVER -> CLIENT: 220 perfora.net (mreueus002) Nemesis ESMTP Service ready
+
+2024-06-17 23:58:35 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-17 23:58:35 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-17 23:58:35 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-17 23:58:35 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-17 23:58:35 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-17 23:58:35 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-17 23:58:35 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-17 23:58:35 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-17 23:58:35 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-17 23:58:35 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-17 23:58:35 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-17 23:58:35 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-17 23:58:35 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-17 23:58:36 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-06-17 23:58:36 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: DATA
+
+2024-06-17 23:58:36 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: Date: Mon, 17 Jun 2024 23:58:35 -0500
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?Actualizaci=C3=B3n_de_Saldo_de_Prepago?=
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: Message-ID: <8Ec80CUgQX37eLRGvaYsL7gxK4YKNweacVLD5jBRE@localhost>
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: 
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: 
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER:             <h1 style="color: #333;">Actualización de Saldo de Prepago</h1>
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER:             <p>Hola FRANCISCO,</p>
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER:             <p>Se ha realizado un abono a tu cuenta prepago de: <strong>500</strong></p>
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER:             <p>Se ha aplicado un incremento de: <strong>50</strong></p>
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER:             <p>Tu nuevo saldo es: <strong>1122</strong></p>
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER:             <p>¡Gracias por ser parte de Sandys Gym!</p>
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER:         
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: 
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: .
+
+2024-06-17 23:58:36 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0MEGlS-1s8SYN3phQ-004zpF
+
+2024-06-17 23:58:36 [1] CLIENT -> SERVER: QUIT
+
+2024-06-17 23:58:36 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-06-18 00:02:34 [2] SERVER -> CLIENT: 220 perfora.net (mreueus003) Nemesis ESMTP Service ready
+
+2024-06-18 00:02:34 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-18 00:02:34 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-18 00:02:34 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-18 00:02:34 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-18 00:02:34 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-18 00:02:34 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-18 00:02:34 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-18 00:02:34 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-18 00:02:34 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-18 00:02:34 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-18 00:02:34 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-18 00:02:34 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-18 00:02:34 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-18 00:02:34 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-18 00:02:34 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-06-18 00:02:34 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-18 00:02:34 [1] CLIENT -> SERVER: DATA
+
+2024-06-18 00:02:35 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: Date: Tue, 18 Jun 2024 00:02:34 -0500
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?Actualizaci=C3=B3n_de_Saldo_de_Prepago?=
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: Message-ID: <a2LgGB4x9vN3tVhy9JJFTIx4lAUdhJettIAHqVhk@localhost>
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: 
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: 
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER:             <h1 style="color: #333;">Actualización de Saldo de Prepago</h1>
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER:             <p>Hola FRANCISCO,</p>
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER:             <p>Se ha realizado un abono a tu cuenta prepago de: <strong>500</strong></p>
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER:             <p>Se ha aplicado un incremento de: <strong>50</strong></p>
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER:             <p>Tu nuevo saldo es: <strong>1672</strong></p>
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER:             <p>¡Gracias por ser parte de Sandys Gym!</p>
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER:         
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: 
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: .
+
+2024-06-18 00:02:35 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0MWlJt-1rrCzJ3HHn-00W3qR
+
+2024-06-18 00:02:35 [1] CLIENT -> SERVER: QUIT
+
+2024-06-18 00:02:35 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-06-18 00:04:59 [2] SERVER -> CLIENT: 220 perfora.net (mreueus004) Nemesis ESMTP Service ready
+
+2024-06-18 00:04:59 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-18 00:04:59 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-18 00:04:59 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-18 00:04:59 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-18 00:04:59 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-18 00:04:59 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-18 00:04:59 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-18 00:05:00 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-18 00:05:00 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-18 00:05:00 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-18 00:05:00 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: RCPT TO:<admin@admin.com>
+
+2024-06-18 00:05:00 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: DATA
+
+2024-06-18 00:05:00 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: Date: Tue, 18 Jun 2024 00:04:59 -0500
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: To: Prueba <admin@admin.com>
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?Actualizaci=C3=B3n_de_Saldo_de_Prepago?=
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: Message-ID: <Ye6D0f1ZBKD01Y1Vq0ClbJJNkljGxN65UqofhlWrGSI@localhost>
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: 
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: 
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER:             <h1 style="color: #333;">Actualización de Saldo de Prepago</h1>
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER:             <p>Hola Prueba,</p>
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER:             <p>Se ha realizado un abono a tu cuenta prepago de: <strong>200</strong></p>
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER:             <p>Se ha aplicado un incremento de: <strong>20</strong></p>
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER:             <p>Tu nuevo saldo es: <strong>185</strong></p>
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER:             <p>¡Gracias por ser parte de Sandys Gym!</p>
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER:         
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: 
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: .
+
+2024-06-18 00:05:00 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=1MVMmB-1ruVkB0VnD-00JHsI
+
+2024-06-18 00:05:00 [1] CLIENT -> SERVER: QUIT
+
+2024-06-18 00:05:00 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-06-20 01:16:35 [2] SERVER -> CLIENT: 220 perfora.net (mreueus003) Nemesis ESMTP Service ready
+
+2024-06-20 01:16:35 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 01:16:35 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-20 01:16:35 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-20 01:16:36 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-20 01:16:36 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 01:16:36 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-20 01:16:36 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-20 01:16:36 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-20 01:16:36 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 01:16:36 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-20 01:16:36 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 01:16:36 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-20 01:16:36 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-20 01:16:36 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-20 01:16:36 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-06-20 01:16:37 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: DATA
+
+2024-06-20 01:16:37 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: Date: Thu, 20 Jun 2024 01:16:35 -0500
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?Actualizaci=C3=B3n_de_Saldo_de_Prepago?=
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: Message-ID: <RLePkocOKaGC7YSVyfEAAuT5lJ2C7Z0sBu8yxutp4I@localhost>
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: 
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: 
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER:             <h1 style="color: #333;">Actualización de Saldo de Prepago</h1>
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER:             <p>Hola FRANCISCO,</p>
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER:             <p>Se ha realizado un abono a tu cuenta prepago de: <strong>10000</strong></p>
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER:             <p>Se ha aplicado un incremento de: <strong>1000</strong></p>
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER:             <p>Tu nuevo saldo es: <strong>11952</strong></p>
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER:             <p>¡Gracias por ser parte de Sandys Gym!</p>
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER:         
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: 
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: .
+
+2024-06-20 01:16:37 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0M0ORH-1seafB2DJF-00rOQA
+
+2024-06-20 01:16:37 [1] CLIENT -> SERVER: QUIT
+
+2024-06-20 01:16:37 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-06-20 01:53:17 [2] SERVER -> CLIENT: 220 perfora.net (mreueus003) Nemesis ESMTP Service ready
+
+2024-06-20 01:53:17 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 01:53:17 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-20 01:53:17 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-20 01:53:17 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-20 01:53:17 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 01:53:17 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-20 01:53:17 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-20 01:53:17 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-20 01:53:17 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 01:53:17 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-20 01:53:17 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 01:53:17 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-20 01:53:17 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-20 01:53:18 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-06-20 01:53:18 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: DATA
+
+2024-06-20 01:53:18 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: Date: Thu, 20 Jun 2024 01:53:16 -0500
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?Actualizaci=C3=B3n_de_Saldo_de_Prepago?=
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: Message-ID: <Vr9J8zD0gG2Xhp6SRuuzji6yxpq6o91PLLMciNVsmHI@localhost>
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: 
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: 
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER:             <h1 style="color: #333;">Actualización de Saldo de Prepago</h1>
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER:             <p>Hola FRANCISCO,</p>
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER:             <p>Se ha realizado un abono a tu cuenta prepago de: <strong>35</strong></p>
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER:             <p>Se ha aplicado un incremento de: <strong>3.5</strong></p>
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER:             <p>Tu nuevo saldo es: <strong>38.75</strong></p>
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER:             <p>¡Gracias por ser parte de Sandys Gym!</p>
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER:         
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: 
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: .
+
+2024-06-20 01:53:18 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0M1m9M-1sdEv92tfG-00sDiy
+
+2024-06-20 01:53:18 [1] CLIENT -> SERVER: QUIT
+
+2024-06-20 01:53:18 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-06-20 01:56:40 [2] SERVER -> CLIENT: 220 perfora.net (mreueus002) Nemesis ESMTP Service ready
+
+2024-06-20 01:56:40 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 01:56:40 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-20 01:56:40 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-20 01:56:41 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-20 01:56:41 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 01:56:41 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-20 01:56:41 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-20 01:56:41 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-20 01:56:41 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 01:56:41 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-20 01:56:41 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 01:56:41 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-20 01:56:41 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-20 01:56:41 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-20 01:56:41 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-06-20 01:56:42 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: DATA
+
+2024-06-20 01:56:42 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: Date: Thu, 20 Jun 2024 01:56:40 -0500
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?Actualizaci=C3=B3n_de_Saldo_de_Prepago?=
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: Message-ID: <WQOq1odHspNVR47u4hyG66ZOvow8ypJUrMB8KffrmR4@localhost>
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: 
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: 
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER:             <h1 style="color: #333;">Actualización de Saldo de Prepago</h1>
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER:             <p>Hola FRANCISCO,</p>
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER:             <p>Se ha realizado un abono a tu cuenta prepago de: <strong>30</strong></p>
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER:             <p>Se ha aplicado un incremento de: <strong>3</strong></p>
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER:             <p>Tu nuevo saldo es: <strong>33.725</strong></p>
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER:             <p>¡Gracias por ser parte de Sandys Gym!</p>
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER:         
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: 
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: .
+
+2024-06-20 01:56:42 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0Lh8XB-1sgLOA2UYJ-00hLXs
+
+2024-06-20 01:56:42 [1] CLIENT -> SERVER: QUIT
+
+2024-06-20 01:56:42 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-06-20 02:00:53 [2] SERVER -> CLIENT: 220 perfora.net (mreueus003) Nemesis ESMTP Service ready
+
+2024-06-20 02:00:53 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 02:00:53 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-20 02:00:53 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-20 02:00:53 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-20 02:00:53 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 02:00:54 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-20 02:00:54 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 02:00:54 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 02:00:54 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-20 02:00:54 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-06-20 02:00:54 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: DATA
+
+2024-06-20 02:00:54 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: Date: Thu, 20 Jun 2024 02:00:53 -0500
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?Actualizaci=C3=B3n_de_Saldo_de_Prepago?=
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: Message-ID: <OiMWvDKjgYCM8weGtcREKmJ0exYhiUrZk1qD9n5zHE0@localhost>
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: 
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: 
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER:             <h1 style="color: #333;">Actualización de Saldo de Prepago</h1>
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER:             <p>Hola FRANCISCO,</p>
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER:             <p>Se ha realizado un abono a tu cuenta prepago de: <strong>35</strong></p>
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER:             <p>Se ha aplicado un incremento de: <strong>3.5</strong></p>
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER:             <p>Tu nuevo saldo es: <strong>38.5034</strong></p>
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER:             <p>¡Gracias por ser parte de Sandys Gym!</p>
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER:         
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: 
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: .
+
+2024-06-20 02:00:54 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0MGCMz-1s7HcH0skx-00FckD
+
+2024-06-20 02:00:54 [1] CLIENT -> SERVER: QUIT
+
+2024-06-20 02:00:55 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-06-20 02:23:22 [2] SERVER -> CLIENT: 220 perfora.net (mreueus003) Nemesis ESMTP Service ready
+
+2024-06-20 02:23:22 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 02:23:22 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-20 02:23:22 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-20 02:23:22 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 02:23:23 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-20 02:23:23 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 02:23:23 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 02:23:23 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-20 02:23:23 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-06-20 02:23:23 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: DATA
+
+2024-06-20 02:23:23 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: Date: Thu, 20 Jun 2024 02:23:22 -0500
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?Actualizaci=C3=B3n_de_Saldo_de_Prepago?=
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: Message-ID: <kHrlddHiMdaZZPdHrRmQWtUFEtDXmojpKcT7pm3fM@localhost>
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: 
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: 
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER:             <h1 style="color: #333;">Actualización de Saldo de Prepago</h1>
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER:             <p>Hola FRANCISCO,</p>
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER:             <p>Se ha realizado un abono a tu cuenta prepago de: <strong>500</strong></p>
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER:             <p>Se ha aplicado un incremento de: <strong>50</strong></p>
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER:             <p>Tu nuevo saldo es: <strong>557.003</strong></p>
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER:             <p>¡Gracias por ser parte de Sandys Gym!</p>
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER:         
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: 
+
+2024-06-20 02:23:23 [1] CLIENT -> SERVER: .
+
+2024-06-20 02:23:24 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0M1Utz-1sdVJ41XQ1-00sUW8
+
+2024-06-20 02:23:24 [1] CLIENT -> SERVER: QUIT
+
+2024-06-20 02:23:24 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-06-20 12:48:18 [2] SERVER -> CLIENT: 220 perfora.net (mreueus002) Nemesis ESMTP Service ready
+
+2024-06-20 12:48:18 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 12:48:18 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-20 12:48:18 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-20 12:48:18 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-20 12:48:18 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-20 12:48:19 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [189.150.31.106]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-20 12:48:19 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 12:48:19 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-20 12:48:19 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-20 12:48:19 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-06-20 12:48:19 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: DATA
+
+2024-06-20 12:48:19 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: Date: Thu, 20 Jun 2024 12:48:18 -0500
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?Actualizaci=C3=B3n_de_Saldo_de_Prepago?=
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: Message-ID: <X7TNYgwqCqanLVoKcrjA5C2AgUx2wLGeWKKxGXEVY@localhost>
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: 
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: 
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER:             <h1 style="color: #333;">Actualización de Saldo de Prepago</h1>
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER:             <p>Hola FRANCISCO,</p>
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER:             <p>Se ha realizado un abono a tu cuenta prepago de: <strong>500</strong></p>
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER:             <p>Se ha aplicado un incremento de: <strong>50</strong></p>
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER:             <p>Tu nuevo saldo es: <strong>1107</strong></p>
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER:             <p>¡Gracias por ser parte de Sandys Gym!</p>
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER:         
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: 
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: .
+
+2024-06-20 12:48:19 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0MdsFf-1rzfgc2mdx-00Wo3U
+
+2024-06-20 12:48:19 [1] CLIENT -> SERVER: QUIT
+
+2024-06-20 12:48:20 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+

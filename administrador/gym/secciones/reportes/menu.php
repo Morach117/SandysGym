@@ -11,4 +11,5 @@
 	<a class="list-group-item" href=".?s=reportes&i=mensualidades_eliminadas"><span class="glyphicon glyphicon-usd"></span> Mensualidades eliminadas <?= ( $item == 'mensualidades_eliminadas' ) ? $focus:'' ?></a>
 	<a class="list-group-item" href=".?s=reportes&i=mensualidades_pagadas"><span class="glyphicon glyphicon-usd"></span> Mensualidades pagadas <?= ( $item == 'mensualidades_pagadas' ) ? $focus:'' ?></a>
 	<a class="list-group-item" href=".?s=reportes&i=fechas_actualizadas"><span class="glyphicon glyphicon-calendar"></span> Fechas actualizadas <?= ( $item == 'fechas_actualizadas' ) ? $focus:'' ?></a>
+	<a class="list-group-item" href=".?s=reportes&i=socios_vencidos"><span class="glyphicon glyphicon-remove-circle"></span> Socios vencidos <?= ( $item == 'socios_vencidos' ) ? $focus:'' ?></a>
 </div>

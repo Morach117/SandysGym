@@ -136,62 +136,61 @@
 		return $exito;
 	}
 	
-	function obtener_importe_prepago( $mes_ganancia = '', $tipo_corte = 'D', $p_id_cajero = 0 )
+	function obtener_importe_prepago($mes_ganancia = '', $tipo_corte = 'D', $p_id_cajero = 0)
 	{
 		global $conexion, $id_empresa;
 		
-		$exito		= array();
-		$exito['total']		= 0;
-		$exito['efectivo']	= 0;
-		$exito['tar_com']	= 0;
-		$exito['tarjeta']	= 0;
-		$exito['comision']	= 0;
+		$exito = array();
+		$exito['total'] = 0;
+		$exito['efectivo'] = 0;
+		$exito['tar_com'] = 0;
+		$exito['tarjeta'] = 0;
+		$exito['comision'] = 0;
 		
-		if( $tipo_corte == 'A' )
-			$condicion = "AND '$mes_ganancia' = DATE_FORMAT( pred_fecha, '%Y' )";
-		elseif( $tipo_corte == 'M' )
-			$condicion = "AND '$mes_ganancia' = DATE_FORMAT( pred_fecha, '%m-%Y' )";
-		else
-			$condicion = "AND '$mes_ganancia' = DATE_FORMAT( pred_fecha, '%d-%m-%Y' )";
+		if ($tipo_corte == 'A') {
+			$condicion = "AND '$mes_ganancia' = DATE_FORMAT(pred_fecha, '%Y')";
+		} elseif ($tipo_corte == 'M') {
+			$condicion = "AND '$mes_ganancia' = DATE_FORMAT(pred_fecha, '%m-%Y')";
+		} else {
+			$condicion = "AND '$mes_ganancia' = DATE_FORMAT(pred_fecha, '%d-%m-%Y')";
+		}
 		
-		if( $p_id_cajero )
+		if ($p_id_cajero) {
 			$condicion .= " AND pred_id_usuario = $p_id_cajero ";
+		}
 		
-		$query		= "	SELECT ROUND( IF( total > 0, total, 0 ) ) AS total
-						FROM
-						(
-							SELECT 		SUM( IF( pred_movimiento = 'S', pred_importe, 0 ) ) - SUM( IF( pred_movimiento = 'R', pred_importe, 0 ) ) AS total
-							FROM		san_prepago_detalle
-							INNER JOIN	san_prepago ON prep_id_prepago = pred_id_prepago
-							WHERE		prep_id_empresa = $id_empresa
-										$condicion
-						) a";
-							
-		$resultado	= mysqli_query( $conexion, $query );
+		$query = "   SELECT ROUND(IF(total > 0, total, 0)) AS total
+					FROM (
+						SELECT  SUM(IF(pred_movimiento = 'S', pred_importe, 0)) - SUM(IF(pred_movimiento = 'R', pred_importe, 0)) AS total
+						FROM    san_prepago_detalle
+						WHERE   pred_id_pdetalle IN (
+									SELECT  prep_id_prepago
+									FROM    san_prepago
+									WHERE   prep_id_empresa = $id_empresa
+								)
+								$condicion
+					) a";
 		
-		if( $resultado )
-		{
-			if( $fila = mysqli_fetch_assoc( $resultado ) )
-			{
+		$resultado = mysqli_query($conexion, $query);
+		
+		if ($resultado) {
+			if ($fila = mysqli_fetch_assoc($resultado)) {
 				$exito['num'] = 1;
 				$exito['msj'] = "Se obtuvieron los datos del corte.";
-				$exito['total']		= $fila['total']; // para no generar error
-				$exito['efectivo']	= $fila['total']; // para no generar error
-			}
-			else
-			{
+				$exito['total'] = $fila['total']; // para no generar error
+				$exito['efectivo'] = $fila['total']; // para no generar error
+			} else {
 				$exito['num'] = 2;
 				$exito['msj'] = "No se pudo obtener el importe por prepago.";
 			}
-		}
-		else
-		{
-			$exito['num']	= 3;
-			$exito['msj']	= "Ocurrió un problema al tratar de obtener el importe por prepago. ".mysqli_error( $conexion );
+		} else {
+			$exito['num'] = 3;
+			$exito['msj'] = "Ocurrió un problema al tratar de obtener el importe por prepago. " . mysqli_error($conexion);
 		}
 		
 		return $exito;
 	}
+	
 	
 	function obtener_importe_venta_efectivo( $mes_ganancia = '', $tipo_corte = 'D', $p_id_cajero = 0 )
 	{

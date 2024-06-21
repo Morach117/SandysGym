@@ -206,6 +206,9 @@
                                        <li>
                                            <a href='.?s=socios&i=pagos&id_socio=$fila[id_socio]$parametros'><span class='glyphicon glyphicon-usd'></span> Pago de Cuotas</a>
                                        </li>
+										<li>
+											<a href='?s=prepagos&i=editar&id_socio=$fila[id_socio]&$parametros'><span class='glyphicon glyphicon-usd'></span> Monedero</a>
+										</li>
                                        
                                        <li>
                                            <a href='.?s=socios&i=fotografia&id_socio=$fila[id_socio]'><span class='glyphicon glyphicon-picture'></span> Fotografía</a>
@@ -214,7 +217,7 @@
                                        <li>
                                            <a href='.?s=socios&i=fechas&id_socio=$fila[id_socio]&id_pago=$fila[id_pago]'><span class='glyphicon glyphicon-calendar'></span> Cambio de Fechas</a>
                                        </li>
-                                       
+
                                        <li>
                                            <a href='.?s=socios&i=eliminar&id_socio=$fila[id_socio]'><span class='glyphicon glyphicon-remove'></span> Eliminar</a>
                                        </li>

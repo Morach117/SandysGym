@@ -64,7 +64,9 @@
 			<div class="row">
 				<div class="col-md-12 text-bold">
 					<input type="radio" name="m_pago" id="m_pago_e" value="E" required onclick="calcular_total()" checked /> Efectivo </br>
-					<input type="radio" name="m_pago" id="m_pago_t" value="T" required onclick="calcular_total()" /> Tarjeta (comisión: <?= $v_comision ?>%)
+					<input type="radio" name="m_pago" id="m_pago_t" value="T" required onclick="calcular_total()" /> Tarjeta <br>
+					<input type="radio" name="m_pago" id="m_pago_m" value="M" required onclick="calcular_total()" /> Monedero
+
 				</div>
 			</div>
 			

@@ -63,5 +63,13 @@
 				<span class="touch-class">Lista de modificaciones en Mensualidades</span>
 			</li>
 		</a>
+		
+        <a href=".?s=reportes&i=socios_vencidos">
+			<li>
+				<span class="glyphicon glyphicon-remove-circle"></span>
+				<h5><strong>Socios Vencidos</strong></h5>
+				<span class="touch-class">Lista de Socios con membresías vencidas</span>
+			</li>
+		</a>
 	</ul>
 </div>

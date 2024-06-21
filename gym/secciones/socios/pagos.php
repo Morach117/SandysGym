@@ -132,349 +132,423 @@
 	$nombre			= obtener_datos_socio();
 	$tabla			= lista_pagos_socio();
 	$archivo_img	= nombre_archivo_imagen( $id_socio );
-	$v_comision		= obtener_p_comision_tarjeta();
-?>
+	?>
 
 <div class="row">
-	<div class="col-md-12">
-		<h4 class="text-info"><span class="glyphicon glyphicon-usd"></span> Captura de Pagos</h4>
-	</div>
+    <div class="col-md-12">
+        <h4 class="text-info"><span class="glyphicon glyphicon-usd"></span> Captura de Pagos</h4>
+    </div>
 </div>
 
-<hr/>
+<hr />
 
 <form role="form" method="post" action=".?s=socios&i=pagos" name="form_pago" enctype="multipart/form-data">
-	<div class="row">
-		<label class="col-md-3">Socio</label>
-		<label class="col-md-9"><?= $nombre['soc_apepat']." ".$nombre['soc_apemat']." ".$nombre['soc_nombres'] ?></label>
-	</div>
+    <div class="row">
+        <label class="col-md-3">Socio</label>
+        <label class="col-md-9">
+            <?= $nombre['soc_apepat']." ".$nombre['soc_apemat']." ".$nombre['soc_nombres'] ?>
+        </label>
+    </div>
 
-	<div class="row">
+    <div class="row">
         <label class="col-md-3">Descuento del Cliente (%)</label>
-        <label class="col-md-9"><?= $nombre['soc_descuento']?>%</label>
+        <label class="col-md-9">
+            <?= $nombre['soc_descuento']?>%
+        </label>
     </div>
-	
-	<div class="row">
-		<label class="col-md-3">Archivo de Img</label>
-		<label class="col-md-9"><?= $archivo_img ?></label>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-7">
-				<div class="row">
-					<label class="col-md-5">Fecha de pago</label>
-					<div class="col-md-7">
-						<input type="text" class="form-control" value="<?= fecha_generica( date( 'd-m-Y' ) ); ?>" readonly="on" />
-					</div>
-				</div>
-				
-				<?= $op_fecha_pago ?>
-				
-				<div class="row">
-					<label class="col-md-5">Servicio</label>
-					<div class="col-md-7">
-						<select class="form-control" name="servicio" id="servicio" onchange="calcular_servicio()" required>
-							<?= $servicios ?>
-						</select>
-					</div>
-				</div>
-				
-				<div class="row <?= $class_oculto ?>" id="importe">
-					<label class="col-md-offset-5 col-md-4"><em>Importe a pagar</em></label>
-					<div class="col-md-3">
-						<input type="text" class="form-control" name="pag_importe" maxlength="5" value="<?= $pag_importe ?>" />
-					</div>
-				</div>
-				
-				<div class="row">
-					<label class="col-md-5">Fecha inicial</label>
-					<div class="col-md-7">
-						<input type="text" class="form-control" name="pag_fecha_ini" id="pag_fecha_ini" onchange="calcular_servicio()" required="required" maxlength="10" value="<?= $pag_fecha_ini ?>" autocomplete="off" />
-					</div>
-				</div>
-				
-				<div class="row">
-					<label class="col-md-5">Fecha vencimiento</label>
-					<div class="col-md-7">
-						<input type="text" class="form-control" name="pag_fecha_fin" id="pag_fecha_fin" value="<?= $pag_fecha_fin ?>" autocomplete="off" />
-					</div>
-				</div>
-				<div class="row">
-					<label class="col-md-5">Código de Promoción</label>
-					<div class="col-md-7">
-						<input type="text" class="form-control" name="codigo_promocion" id="codigo_promocion" value="<?= $codigo_promocion ?>" autocomplete="off" />
-					</div>
-				</div>
 
-				<div class="row">
-    <div class="col-md-12">
-        <h4 class="text-info">Detalle del Pago</h4>
+    <div class="row">
+        <label class="col-md-3">Archivo de Img</label>
+        <label class="col-md-9">
+            <?= $archivo_img ?>
+        </label>
+        <input type="hidden" id="id_socio" value="<?= $id_socio ?>" />
+
     </div>
-</div>
 
-<div class="row">
-    <div class="col-md-12">
-        <p>Subtotal: <span id="subtotal"></span></p>
-        <p>Descuento: <span id="descuento"></span></p>
-        <p>Total: <span id="total"></span></p>
+    <div class="row">
+        <div class="col-md-7">
+            <div class="row">
+                <label class="col-md-5">Fecha de pago</label>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" value="<?= fecha_generica( date( 'd-m-Y' ) ); ?>"
+                        readonly="on" />
+                </div>
+            </div>
+
+            <?= $op_fecha_pago ?>
+
+            <div class="row">
+                <label class="col-md-5">Servicio</label>
+                <div class="col-md-7">
+                    <select class="form-control" name="servicio" id="servicio" onchange="calcular_servicio()" required>
+                        <?= $servicios ?>
+                    </select>
+                </div>
+            </div>
+
+			<div class="row">
+    <label class="col-md-5">Método de pago</label>
+    <div class="col-md-7">
+        <select class="form-control" name="m_pago" id="m_pago" required>
+            <option value="E" selected>Efectivo</option>
+            <option value="T">Tarjeta</option>
+            <option value="M">Monedero</option>
+        </select>
     </div>
 </div>
 
 
+            <div class="row <?= $class_oculto ?>" id="importe">
+                <label class="col-md-offset-5 col-md-4"><em>Importe a pagar</em></label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="pag_importe" maxlength="5"
+                        value="<?= $pag_importe ?>" />
+                </div>
+            </div>
 
-		</div>
-		
-		<div class="col-md-5" align="center">
-			<div class="row">
-				<div class="col-md-12">	
-					<?= $fotografia ?>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="col-md-12">
-					<input type="file" name="avatar" />
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-12">
-			<h5 class="text-info"><strong>Método de pago</strong></h5>
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-12 text-bold">
-			<input type="radio" name="m_pago" value="E" required checked /> Efectivo </br>
-			<input type="radio" name="m_pago" value="T" required /> Tarjeta (comisión: <?= $v_comision ?>%)
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-md-12">
-			<input type="hidden" name="pag_opciones" value="<?= $pag_opciones ?>" />
-			<input type="hidden" name="pag_busqueda" value="<?= $pag_busqueda ?>" />
-			<input type="hidden" name="pag_fechai" value="<?= $pag_fechai ?>" />
-			<input type="hidden" name="pag_fechaf" value="<?= $pag_fechaf ?>" />
-			<input type="hidden" name="pag_item" value="<?= $pag_item ?>" />
-			<input type="hidden" name="blq" value="<?= $pag_blq ?>" />
-			<input type="hidden" name="pag" value="<?= $pag_pag ?>" />
-			
-			<input type="hidden" name="comision" value="<?= $v_comision ?>" />
-			<input type="hidden" name="id_socio" value="<?= $id_socio ?>" />
-			<input type="submit" name="enviar" value="Cobrar y guardar" class="btn btn-primary" />
-			<input type="button" name="Regresar" value="Regresar" class="btn btn-default" onclick="location.href='<?= $volver ?>'" />
-		</div>
-	</div>
+            <div class="row">
+                <label class="col-md-5">Fecha inicial</label>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" name="pag_fecha_ini" id="pag_fecha_ini"
+                        onchange="calcular_servicio()" required="required" maxlength="10" value="<?= $pag_fecha_ini ?>"
+                        autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-md-5">Fecha vencimiento</label>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" name="pag_fecha_fin" id="pag_fecha_fin"
+                        value="<?= $pag_fecha_fin ?>" autocomplete="off" />
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-md-5">Código de Promoción</label>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" name="codigo_promocion" id="codigo_promocion"
+                        value="<?= $codigo_promocion ?>" autocomplete="off" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h4 class="text-info" style="font-size: 1.5em;"><strong>Detalle del Pago</strong></h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" style="font-size: 18px;">
+                    <p style="font-size: 18px; font-weight: bold;">Subtotal: <span id="subtotal"></span></p>
+                    <p style="font-size: 18px; font-weight: bold;">Descuento: <span id="descuento"></span></p>
+                    <p style="font-size: 18px; font-weight: bold;">Total: <span id="total"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5" align="center">
+            <div class="row">
+                <div class="col-md-12">
+                    <?= $fotografia ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="file" name="avatar" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+	<div class="row" id="monedero-section" style="display: none;">
+    <label class="col-md-5">Saldo del monedero</label>
+    <div class="col-md-7">
+        <input type="text" class="form-control" id="saldo_monedero" name="saldo_monedero" value="" readonly />
+    </div>
+</div>
+
+<div class="row" id="efectivo-section" style="display: none;">
+        <label class="col-md-5">Cantidad a pagar en efectivo</label>
+        <div class="col-md-7">
+            <input type="text" class="form-control" id="cantidad_efectivo" name="cantidad_efectivo" value="0" />
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <input type="hidden" name="pag_opciones" value="<?= $pag_opciones ?>" />
+            <input type="hidden" name="pag_busqueda" value="<?= $pag_busqueda ?>" />
+            <input type="hidden" name="pag_fechai" value="<?= $pag_fechai ?>" />
+            <input type="hidden" name="pag_fechaf" value="<?= $pag_fechaf ?>" />
+            <input type="hidden" name="pag_item" value="<?= $pag_item ?>" />
+            <input type="hidden" name="blq" value="<?= $pag_blq ?>" />
+            <input type="hidden" name="pag" value="<?= $pag_pag ?>" />
+
+            <input type="hidden" name="id_socio" value="<?= $id_socio ?>" />
+            <input type="submit" name="enviar" value="Cobrar y guardar" class="btn btn-primary" />
+            <input type="button" name="Regresar" value="Regresar" class="btn btn-default"
+                onclick="location.href='<?= $volver ?>'" />
+        </div>
+    </div>
 </form>
 
 <div class="row">
-	<div class="col-md-12">
-		<h5 class="text-info"><strong>Historico de pagos</strong></h5>
-	</div>
+    <div class="col-md-12">
+        <h5 class="text-info"><strong>Historico de pagos</strong></h5>
+    </div>
 </div>
 
 <div class="row">
-	<div class="col-md-12">
-		<table class="table table-hover h6">
-			<thead>
-				<th></th>
-				<th>Servicio pagado</th>
-				<th>Fecha de pago</th>
-				<th>Fecha inicial</th>
-				<th>Vencimiento</th>
-				<th class="text-right">Importe</th>
-			</thead>
-			
-			<tbody>
-				<?= $tabla ?>
-			</tbody>
-		</table>
-	</div>
+    <div class="col-md-12">
+        <table class="table table-hover h6">
+            <thead>
+                <th></th>
+                <th>Servicio pagado</th>
+                <th>Fecha de pago</th>
+                <th>Fecha inicial</th>
+                <th>Vencimiento</th>
+                <th class="text-right">Importe</th>
+            </thead>
+
+            <tbody>
+                <?= $tabla ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 
-
 <script>
-// Bandera para verificar si ya se ha aplicado el descuento de cumpleaños
-var descuentoCumpleanosAplicado = false;
+$('#m_pago').change(function () {
+    var metodoPago = $(this).val();
+    if (metodoPago === 'M') {
+        var idSocio = $('#id_socio').val();
+        $.ajax({
+            url: './funciones/saldo_monedero.php',
+            type: 'GET',
+            data: { id_socio: idSocio },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    var saldoMonedero = parseFloat(response.saldo_monedero);
+                    var importeServicio = parseFloat(document.getElementById("subtotal").textContent);
+                    
+                    if (saldoMonedero < importeServicio) {
+                        $('#efectivo-section').show(); // Mostrar la sección de pago en efectivo
+                        $('#monedero-section').show(); // Mostrar la sección del monedero
+                        $('#saldo_monedero').val(saldoMonedero.toFixed(2)); // Mostrar el saldo del monedero en el campo de entrada
+                        
+                        var cantidadFaltante = importeServicio - saldoMonedero;
+                        $('#cantidad_efectivo').val(cantidadFaltante.toFixed(2)); // Mostrar la cantidad faltante en el campo de efectivo
+                    } else {
+                        $('#efectivo-section').hide(); // Ocultar la sección de pago en efectivo si no es necesario
+                        $('#monedero-section').show(); // Mostrar la sección del monedero
+                        $('#saldo_monedero').val(saldoMonedero.toFixed(2)); // Mostrar el importe del servicio en el campo de entrada del monedero
+                    }
+                } else {
+                    console.error('Error al obtener el saldo del monedero:', response.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error al obtener el saldo del monedero:', error);
+            }
+        });
+    } else {
+        $('#efectivo-section').hide(); // Ocultar la sección de pago en efectivo si no se selecciona monedero
+        $('#monedero-section').hide(); // Ocultar la sección del monedero si no se selecciona monedero
+    }
+});
 
-// Función para obtener la cuota del servicio mediante una solicitud AJAX
-function obtenerCuotaServicio() {
-    var servicioSeleccionado = document.getElementById("servicio").value;
-    var id_servicio = servicioSeleccionado.split('-')[0];
 
-    if (!id_servicio) {
-        console.error("Error: El id_servicio es inválido.");
-        return;
+
+
+    // Función para obtener parámetros de la URL
+    function obtenerParametroURL(nombre) {
+        var urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(nombre);
     }
 
-    var xhr = new XMLHttpRequest();
+    // Bandera para verificar si ya se ha aplicado el descuento de cumpleaños
+    var descuentoCumpleanosAplicado = false;
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                var respuesta = JSON.parse(xhr.responseText);
+    // Función para obtener la cuota del servicio mediante una solicitud AJAX
+    function obtenerCuotaServicio() {
+        var servicioSeleccionado = document.getElementById("servicio").value;
+        var id_servicio = servicioSeleccionado.split('-')[0];
 
-                if (respuesta.success) {
-                    var cuota = parseFloat(respuesta.cuota);
+        if (!id_servicio) {
+            console.error("Error: El id_servicio es inválido.");
+            return;
+        }
 
-                    // Mostrar la cuota sin aplicar ningún descuento
-                    document.getElementById("subtotal").textContent = cuota.toFixed(2);
+        var xhr = new XMLHttpRequest();
 
-                    // Verificar si es el mes de cumpleaños del cliente
-                    verificarCumpleanos();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var respuesta = JSON.parse(xhr.responseText);
 
-                    // Si no es el mes de cumpleaños, verificar y aplicar otros descuentos
-                    if (!descuentoCumpleanosAplicado) {
+                    if (respuesta.success) {
+                        var cuota = parseFloat(respuesta.cuota);
+
+                        // Mostrar la cuota sin aplicar ningún descuento
+                        document.getElementById("subtotal").textContent = cuota.toFixed(2);
+
+                        // Verificar si es el mes de cumpleaños del cliente
+                        verificarCumpleanos();
+
+                        // Si no es el mes de cumpleaños, verificar y aplicar otros descuentos
+                        if (!descuentoCumpleanosAplicado) {
+                            // Verificar si el cliente tiene un descuento almacenado
+                            var descuentoCliente = parseFloat(<?= json_encode($nombre['soc_descuento']); ?>);
+                            if (!isNaN(descuentoCliente)) {
+                                aplicarDescuentoCliente(descuentoCliente);
+                            } else {
+                                document.getElementById("descuento").textContent = '0.00';
+                                document.getElementById("total").textContent = cuota.toFixed(2);
+                            }
+                        }
+                    } else {
+                        console.error("Error al obtener la cuota del servicio:", respuesta.error);
+                    }
+                } else {
+                    console.error('Error al realizar la solicitud:', xhr.status);
+                }
+            }
+        };
+
+        xhr.open("GET", "././funciones/obtener_cuota_servicio.php?id_servicio=" + id_servicio, true);
+        xhr.send();
+    }
+
+    // Función para verificar si el servicio seleccionado tiene descuentos promocionales permitidos
+    function verificarDescuentosPromocionales(id_servicio) {
+        if (descuentoCumpleanosAplicado) return;
+
+        var xhrDescuentos = new XMLHttpRequest();
+        xhrDescuentos.onreadystatechange = function () {
+            if (xhrDescuentos.readyState === XMLHttpRequest.DONE) {
+                if (xhrDescuentos.status === 200) {
+                    var respuestaDescuentos = JSON.parse(xhrDescuentos.responseText);
+                    if (!respuestaDescuentos.success) {
+                        // Mostrar una alerta si el servicio no tiene descuentos promocionales permitidos
+                        alert("El servicio seleccionado no tiene descuentos promocionales permitidos.");
+
+                        // Recargar la página después de 2 segundos
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    }
+                } else {
+                    console.error('Error al realizar la solicitud para verificar los descuentos promocionales:', xhrDescuentos.status);
+                }
+            }
+        };
+
+        xhrDescuentos.open("GET", "././funciones/verificar_descuentos_promocionales.php?id_servicio=" + id_servicio, true);
+        xhrDescuentos.send();
+    }
+
+    // Función para aplicar el descuento del cliente
+    function aplicarDescuentoCliente(descuentoCliente) {
+        if (descuentoCumpleanosAplicado) return;
+
+        var cuota = parseFloat(document.getElementById("subtotal").textContent);
+        var montoDescontadoCliente = cuota * (descuentoCliente / 100);
+        var totalConDescuentoCliente = cuota - montoDescontadoCliente;
+
+        // Mostrar el descuento del cliente y el total a pagar
+        document.getElementById("descuento").textContent = montoDescontadoCliente.toFixed(2);
+        document.getElementById("total").textContent = totalConDescuentoCliente.toFixed(2);
+    }
+
+    // Función para aplicar el descuento del código promocional
+    function aplicarDescuentoPromocional(codigo_promocion) {
+        if (descuentoCumpleanosAplicado) return;
+
+        var servicioSeleccionado = document.getElementById("servicio").value;
+        var id_servicio = servicioSeleccionado.split('-')[0];
+
+        verificarDescuentosPromocionales(id_servicio); // Verificar descuentos promocionales para el nuevo servicio seleccionado
+
+        var xhrPromocion = new XMLHttpRequest();
+        xhrPromocion.onreadystatechange = function () {
+            if (xhrPromocion.readyState === XMLHttpRequest.DONE) {
+                if (xhrPromocion.status === 200) {
+                    var respuestaPromocion = JSON.parse(xhrPromocion.responseText);
+                    if (respuestaPromocion.success) {
+                        var descuentoPromocion = parseFloat(respuestaPromocion.porcentaje_descuento);
+                        var cuota = parseFloat(document.getElementById("subtotal").textContent);
+
+                        // Calcular el descuento total sumando el descuento del cliente y el descuento del código promocional
+                        var descuentoTotal = 0;
+
                         // Verificar si el cliente tiene un descuento almacenado
                         var descuentoCliente = parseFloat(<?= json_encode($nombre['soc_descuento']); ?>);
                         if (!isNaN(descuentoCliente)) {
-                            aplicarDescuentoCliente(descuentoCliente);
-                        } else {
-                            document.getElementById("descuento").textContent = '0.00';
-                            document.getElementById("total").textContent = cuota.toFixed(2);
+                            descuentoTotal += descuentoCliente;
                         }
+
+                        descuentoTotal += descuentoPromocion;
+
+                        var montoDescontadoTotal = cuota * (descuentoTotal / 100);
+                        var totalConDescuentoTotal = cuota - montoDescontadoTotal;
+
+                        // Mostrar el descuento total y el total a pagar
+                        document.getElementById("descuento").textContent = montoDescontadoTotal.toFixed(2);
+                        document.getElementById("total").textContent = totalConDescuentoTotal.toFixed(2);
+                    } else {
+                        alert("Error: " + respuestaPromocion.error);
                     }
                 } else {
-                    console.error("Error al obtener la cuota del servicio:", respuesta.error);
+                    console.error('Error al realizar la solicitud para verificar el código promocional:', xhrPromocion.status);
                 }
-            } else {
-                console.error('Error al realizar la solicitud:', xhr.status);
             }
-        }
-    };
+        };
 
-    xhr.open("GET", "././funciones/obtener_cuota_servicio.php?id_servicio=" + id_servicio, true);
-    xhr.send();
-}
-
-// Función para verificar si el servicio seleccionado tiene descuentos promocionales permitidos
-function verificarDescuentosPromocionales(id_servicio) {
-    if (descuentoCumpleanosAplicado) return;
-
-    var xhrDescuentos = new XMLHttpRequest();
-    xhrDescuentos.onreadystatechange = function() {
-        if (xhrDescuentos.readyState === XMLHttpRequest.DONE) {
-            if (xhrDescuentos.status === 200) {
-                var respuestaDescuentos = JSON.parse(xhrDescuentos.responseText);
-                if (!respuestaDescuentos.success) {
-                    // Mostrar una alerta si el servicio no tiene descuentos promocionales permitidos
-                    alert("El servicio seleccionado no tiene descuentos promocionales permitidos.");
-
-                    // Recargar la página después de 2 segundos
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1000);
-                }
-            } else {
-                console.error('Error al realizar la solicitud para verificar los descuentos promocionales:', xhrDescuentos.status);
-            }
-        }
-    };
-
-    xhrDescuentos.open("GET", "././funciones/verificar_descuentos_promocionales.php?id_servicio=" + id_servicio, true);
-    xhrDescuentos.send();
-}
-
-// Función para aplicar el descuento del cliente
-function aplicarDescuentoCliente(descuentoCliente) {
-    if (descuentoCumpleanosAplicado) return;
-
-    var cuota = parseFloat(document.getElementById("subtotal").textContent);
-    var montoDescontadoCliente = cuota * (descuentoCliente / 100);
-    var totalConDescuentoCliente = cuota - montoDescontadoCliente;
-
-    // Mostrar el descuento del cliente y el total a pagar
-    document.getElementById("descuento").textContent = montoDescontadoCliente.toFixed(2);
-    document.getElementById("total").textContent = totalConDescuentoCliente.toFixed(2);
-}
-
-// Función para aplicar el descuento del código promocional
-function aplicarDescuentoPromocional(codigo_promocion) {
-    if (descuentoCumpleanosAplicado) return;
-
-    var servicioSeleccionado = document.getElementById("servicio").value;
-    var id_servicio = servicioSeleccionado.split('-')[0];
-
-    verificarDescuentosPromocionales(id_servicio); // Verificar descuentos promocionales para el nuevo servicio seleccionado
-
-    var xhrPromocion = new XMLHttpRequest();
-    xhrPromocion.onreadystatechange = function() {
-        if (xhrPromocion.readyState === XMLHttpRequest.DONE) {
-            if (xhrPromocion.status === 200) {
-                var respuestaPromocion = JSON.parse(xhrPromocion.responseText);
-                if (respuestaPromocion.success) {
-                    var descuentoPromocion = parseFloat(respuestaPromocion.porcentaje_descuento);
-                    var cuota = parseFloat(document.getElementById("subtotal").textContent);
-
-                    // Calcular el descuento total sumando el descuento del cliente y el descuento del código promocional
-                    var descuentoTotal = 0;
-
-                    // Verificar si el cliente tiene un descuento almacenado
-                    var descuentoCliente = parseFloat(<?= json_encode($nombre['soc_descuento']); ?>);
-                    if (!isNaN(descuentoCliente)) {
-                        descuentoTotal += descuentoCliente;
-                    }
-                    
-                    descuentoTotal += descuentoPromocion;
-
-                    var montoDescontadoTotal = cuota * (descuentoTotal / 100);
-                    var totalConDescuentoTotal = cuota - montoDescontadoTotal;
-
-                    // Mostrar el descuento total y el total a pagar
-                    document.getElementById("descuento").textContent = montoDescontadoTotal.toFixed(2);
-                    document.getElementById("total").textContent = totalConDescuentoTotal.toFixed(2);
-                } else {
-                    alert("Error: " + respuestaPromocion.error);
-                }
-            } else {
-                console.error('Error al realizar la solicitud para verificar el código promocional:', xhrPromocion.status);
-            }
-        }
-    };
-
-    xhrPromocion.open("GET", "././funciones/verificar_codigo_promocional.php?codigo_promocion=" + codigo_promocion, true);
-    xhrPromocion.send();
-}
-
-// Función para verificar si el cliente cumple años este mes
-function verificarCumpleanos() {
-    console.log("Verificando cumpleaños del cliente...");
-
-    var fechaNacimientoString = "<?= $nombre['soc_fecha_nacimiento']; ?>";
-    console.log("Fecha de nacimiento (string):", fechaNacimientoString);
-
-    var fechaNacimiento = new Date(fechaNacimientoString + "T00:00:00");
-    console.log("Fecha de nacimiento (Date):", fechaNacimiento);
-
-    var fechaActual = new Date();
-    console.log("Fecha actual:", fechaActual);
-
-    if (fechaNacimiento.getMonth() === fechaActual.getMonth()) {
-        alert("¡Feliz cumpleaños! Tienes un descuento especial.");
-        document.getElementById("codigo_promocion").value = "70x05U99";
-        aplicarDescuentoPromocional("70x05U99");
-        descuentoCumpleanosAplicado = true; // Marcar que se ha aplicado el descuento de cumpleaños
-    } else {
-        console.log("No es el mes de cumpleaños del cliente.");
+        xhrPromocion.open("GET", "././funciones/verificar_codigo_promocional.php?codigo_promocion=" + codigo_promocion, true);
+        xhrPromocion.send();
     }
-}
 
-// Llamar a la función inicialmente para que se muestre el total correcto al cargar la página
-obtenerCuotaServicio();
+    // Función para verificar si el cliente cumple años este mes
+    function verificarCumpleanos() {
+        console.log("Verificando cumpleaños del cliente...");
 
-// Agregar un evento onchange al select de servicio para llamar a la función obtenerCuotaServicio() cuando cambie
-document.getElementById("servicio").onchange = obtenerCuotaServicio;
+        var fechaNacimientoString = "<?= $nombre['soc_fecha_nacimiento']; ?>";
+        console.log("Fecha de nacimiento (string):", fechaNacimientoString);
 
-// Agregar un evento onchange al campo de código promocional
-document.getElementById("codigo_promocion").onchange = function() {
-    var codigo_promocion = this.value;
-    if (codigo_promocion) {
-        aplicarDescuentoPromocional(codigo_promocion);
+        var fechaNacimiento = new Date(fechaNacimientoString + "T00:00:00");
+        console.log("Fecha de nacimiento (Date):", fechaNacimiento);
+
+        var fechaActual = new Date();
+        console.log("Fecha actual:", fechaActual);
+
+        if (fechaNacimiento.getMonth() === fechaActual.getMonth()) {
+            alert("¡Feliz cumpleaños! Tienes un descuento especial.");
+            document.getElementById("codigo_promocion").value = "70x05U99";
+            aplicarDescuentoPromocional("70x05U99");
+            descuentoCumpleanosAplicado = true; // Marcar que se ha aplicado el descuento de cumpleaños
+        } else {
+            console.log("No es el mes de cumpleaños del cliente.");
+        }
     }
-};
+
+    // Llamar a la función inicialmente para que se muestre el total correcto al cargar la página
+    obtenerCuotaServicio();
+
+    // Agregar un evento onchange al select de servicio para llamar a la función obtenerCuotaServicio() cuando cambie
+    document.getElementById("servicio").onchange = obtenerCuotaServicio;
+
+    // Agregar un evento onchange al campo de código promocional
+    document.getElementById("codigo_promocion").onchange = function () {
+        var codigo_promocion = this.value;
+        if (codigo_promocion) {
+            aplicarDescuentoPromocional(codigo_promocion);
+        }
+    };
 </script>
-

@@ -3,7 +3,6 @@
 	require_once( "../../funciones_globales/funciones_comunes.php" );
 	require_once( "../../funciones_globales/funciones_phpBB.php" );
 	require_once( "../funciones/sesiones.php" );
-	
 	require_once( "../funciones/funciones_venta.php" );
 	
 	/*desde javascript*/
@@ -18,7 +17,6 @@
 	$id_prepago		= request_var( 'id_prepago', 0 ); /*ID de prepago del socio para descontar de su saldo*/
 	$commit			= request_var( 'commit', 'N' ); /*indica si se termina o no la venta*/
 	$js_metodo_pago	= request_var( 'tipo_pago', '' ); /*E-T*/
-	$js_comision	= request_var( 'comision', 0.0 );
 	
 	/*propias del codigo del modal*/
 	$v_tot_tarjeta	= 0;
@@ -105,15 +103,9 @@
 						}
 					}
 					
-					$v_monto_comision	= 0;
-					
 					if( $js_metodo_pago == 'T' )
 					{
-						
-						if( $js_comision > 0 )
-							$v_monto_comision = $v_sub_total * ( $js_comision / 100 );
-						
-						$v_tot_tarjeta		= round( $v_sub_total + $v_monto_comision, 2 );
+						$v_tot_tarjeta		= round( $v_sub_total, 2 );
 						$js_tot_efectivo	= 0;
 						$v_efectivo_prep	= 0;
 					}
@@ -130,7 +122,7 @@
 								if( $commit == 'S' )
 								{
 									
-									$exito = preocesar_venta( $array_cant_id, $chk_prepago, $id_prepago, $js_tot_prepago, $js_tot_efectivo - $v_tot_cambio, $v_sub_total, $js_metodo_pago, $v_tot_tarjeta - $v_monto_comision, $v_monto_comision );
+									$exito = preocesar_venta( $array_cant_id, $chk_prepago, $id_prepago, $js_tot_prepago, $js_tot_efectivo - $v_tot_cambio, $v_sub_total, $js_metodo_pago, $v_tot_tarjeta, 0 );
 									
 									if( $exito['num'] != 1 )
 										$etiqueta = "text-danger";
@@ -203,46 +195,46 @@
 					<h4 class="modal-title text-primary">Artículos vendidos.</h4>
 				</div>
 				
-				<div class="modal-body">
-					<table class="table table-hover">
-						<thead>
-							<tr class="active">
-								<th>Cantidad</th>
-								<th>Descripción</th>
-								<th class="text-right">Precio</th>
-								<th class="text-right">Importe</th>
-							</tr>
-						</thead>
-						
-						<tbody>
-							<?= $tabla ?>
-						</tbody>
-					</table>
+					<div class="modal-body">
+						<table class="table table-hover">
+							<thead>
+								<tr class="active">
+									<th>Cantidad</th>
+									<th>Descripción</th>
+									<th class="text-right">Precio</th>
+									<th class="text-right">Importe</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								<?= $tabla ?>
+							</tbody>
+						</table>
 
-					<p class="text-right">
-						<br/><label><?= $total_articulo ?> artículos por un total de $<?= number_format( $v_sub_total, 2 ) ?></label>
-						<br/>Tarjeta: <label>$<?= number_format( $v_tot_tarjeta, 2 ) ?></label>
-						<br/>Efectivo: <label>$<?= number_format( $js_tot_efectivo, 2 ) ?></label>
-						<br/>Prepago: <label>$<?= number_format( $js_tot_prepago, 2 ) ?></label>
-						<br/><h4 class="text-right text-success">Cambio: $<?= number_format( $v_tot_cambio, 2 ) ?></h4>
-					</p>
+						<p class="text-right">
+							<br/><label><?= $total_articulo ?> artículos por un total de $<?= number_format( $v_sub_total, 2 ) ?></label>
+							<br/>Tarjeta: <label>$<?= number_format( $v_tot_tarjeta, 2 ) ?></label>
+							<br/>Efectivo: <label>$<?= number_format( $js_tot_efectivo, 2 ) ?></label>
+							<br/>Prepago: <label>$<?= number_format( $js_tot_prepago, 2 ) ?></label>
+							<br/><h4 class="text-right text-success">Cambio: $<?= number_format( $v_tot_cambio, 2 ) ?></h4>
+						</p>
+						
+						<h4 class="text-right <?= $etiqueta ?>">
+							<?= $exito['num'] .". ". $exito['msj'] ?>
+						</h4>
+					</div>
 					
-					<h4 class="text-right <?= $etiqueta ?>">
-						<?= $exito['num'] .". ". $exito['msj'] ?>
-					</h4>
-				</div>
-				
-				<div class="modal-footer">
-					<label id="msj_procesar">&nbsp;</label>
-					<label id="img_procesar">&nbsp;</label>
-					
-					<label id="btn_procesar">
-						<button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
-						<button type="button" onclick="checar_articulos( 'S' )" class="btn btn-primary">Realizar la Venta</button>
-					</label>
+					<div class="modal-footer">
+						<label id="msj_procesar">&nbsp;</label>
+						<label id="img_procesar">&nbsp;</label>
+						
+						<label id="btn_procesar">
+							<button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+							<button type="button" onclick="checar_articulos( 'S' )" class="btn btn-primary">Realizar la Venta</button>
+						</label>
+					</div>
 				</div>
 			</div>
-		</div>
 <?php
 	}
 	

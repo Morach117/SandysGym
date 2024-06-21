@@ -77,54 +77,51 @@ function calcular_importe( id_articulo )
 
 function calcular_total()
 {
-	var total		= 0;
-	var sub_total	= 0;
-	var id_articulo	= '';
-	var tag_text	= document.getElementsByTagName( 'input' );
-	var comision	= document.getElementById( 'comision' ).value;
-	
-	var precio		= 0;
-	var cantidad	= 0;
-	
-	for( var i = 0; i < tag_text.length; i++ )
-	{
-		if( tag_text[i].type == 'hidden' && 'art' == tag_text[i].name.substring( 0, 3 ) )
-		{
-			id_articulo	= tag_text[i].value;
-			precio		= document.getElementById( 'pre_' + id_articulo ).value;
-			cantidad	= document.getElementById( 'can_' + id_articulo ).value;
-			
-			var importe	= cantidad * precio;
-			
-			sub_total += importe;
-		}
-	}
-	
-	if( document.getElementById( 'm_pago_e' ).checked )
-	{
-		$( "#mostrar_socio" ).attr( 'disabled', false );
-		$( "#prepago" ).attr( 'disabled', false );
-		$( "#efectivo" ).attr( 'disabled', false );
-		
-		total = sub_total;
-	}
-	else if( document.getElementById( 'm_pago_t' ).checked )
-	{
-		$( "#mostrar_socio" ).attr( 'disabled', true );
-		$( "#prepago" ).attr( 'disabled', true );
-		$( "#efectivo" ).attr( 'disabled', true );
-		
-		if( comision > 0 )
-			total = parseFloat( sub_total ) + ( sub_total * ( comision / 100 ) );
-		else
-			total = sub_total;
-	}
-	
-	document.getElementById( 'input_total' ).value = total;
-	
-	document.getElementById( 'tag_sub_total' ).innerHTML = '$' + sub_total.toFixed(2);
-	document.getElementById( 'tag_total_pago' ).innerHTML = '$' + parseFloat( total ).toFixed(2);
+    var total       = 0;
+    var sub_total   = 0;
+    var id_articulo = '';
+    var tag_text    = document.getElementsByTagName('input');
+    
+    var precio      = 0;
+    var cantidad    = 0;
+    
+    for (var i = 0; i < tag_text.length; i++)
+    {
+        if (tag_text[i].type == 'hidden' && 'art' == tag_text[i].name.substring(0, 3))
+        {
+            id_articulo = tag_text[i].value;
+            precio      = document.getElementById('pre_' + id_articulo).value;
+            cantidad    = document.getElementById('can_' + id_articulo).value;
+            
+            var importe = cantidad * precio;
+            
+            sub_total += importe;
+        }
+    }
+    
+    if (document.getElementById('m_pago_e').checked)
+    {
+        $( "#mostrar_socio" ).attr('disabled', false);
+        $( "#prepago" ).attr('disabled', false);
+        $( "#efectivo" ).attr('disabled', false);
+        
+        total = sub_total;
+    }
+    else if (document.getElementById('m_pago_t').checked)
+    {
+        $( "#mostrar_socio" ).attr('disabled', true);
+        $( "#prepago" ).attr('disabled', true);
+        $( "#efectivo" ).attr('disabled', true);
+        
+        total = sub_total;
+    }
+    
+    document.getElementById('input_total').value = total;
+    
+    document.getElementById('tag_sub_total').innerHTML = '$' + sub_total.toFixed(2);
+    document.getElementById('tag_total_pago').innerHTML = '$' + parseFloat(total).toFixed(2);
 }
+
 
 function quitar_de_lista( id_articulo )
 {
