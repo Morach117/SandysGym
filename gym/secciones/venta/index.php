@@ -64,22 +64,20 @@
 			<div class="row">
 				<div class="col-md-12 text-bold">
 					<input type="radio" name="m_pago" id="m_pago_e" value="E" required onclick="calcular_total()" checked /> Efectivo </br>
-					<input type="radio" name="m_pago" id="m_pago_t" value="T" required onclick="calcular_total()" /> Tarjeta <br>
-					<input type="radio" name="m_pago" id="m_pago_m" value="M" required onclick="calcular_total()" /> Monedero
-
+					<input type="radio" name="m_pago" id="m_pago_t" value="T" required onclick="calcular_total()" /> Tarjeta (comisión: <?= $v_comision ?>%)
 				</div>
 			</div>
 			
 			<hr/>
 			
 			<div class="row">
-				<div class="col-md-2"><label>Prepago</label></div>
+				<div class="col-md-2"><label>Monedero</label></div>
 				<div class="col-md-1"><input type="checkbox" id="mostrar_socio" onclick="mostrar_socios( event )" /></div>
 				<div class="col-md-9"><label id="nombre_socio"></label></div>
 			</div>
 			
 			<div class="row" style="display:none" id="div_prepago">
-				<div class="col-md-2"><label>Prepago</label></div>
+				<div class="col-md-2"><label>Monedero</label></div>
 				<div class="col-md-4"><input type="text" class="form-control" id="prepago" /></div>
 			</div>
 			

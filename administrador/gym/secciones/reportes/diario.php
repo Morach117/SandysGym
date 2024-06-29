@@ -67,7 +67,7 @@
 	$v_tar_com	= $v_tarjeta + $v_comsion;
 	
 	if( $v_efectivo )
-		$por_retirar = $v_efectivo - $importe_cortes;
+		$por_retirar = $v_total - $importe_cortes;
 ?>
 
 <form action=".?s=<?= $seccion ?>&i=<?= $item ?>" method="post">

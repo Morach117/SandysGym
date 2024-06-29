@@ -212,29 +212,30 @@
 		return $datos;
 	}
 	
-	function lista_detalle_prepagos( $fecha_mov )
+	function lista_detalle_prepagos($fecha_mov)
 	{
 		global $conexion, $id_empresa;
 		
-		$datos		= array();
+		$datos = array();
 		
-		$query		= "	SELECT		DATE_FORMAT( pred_fecha, '%m' ) AS mes,
-									SUM( pred_importe ) AS importe
-						FROM		san_prepago
-						INNER JOIN	san_prepago_detalle ON pred_id_prepago = prep_id_prepago
-						WHERE		DATE_FORMAT( pred_fecha, '%Y' ) = '$fecha_mov'
-						AND			prep_id_empresa = $id_empresa
-						AND			pred_movimiento = 'S'
-						GROUP BY	DATE_FORMAT( pred_fecha, '%m-%Y' )";
+		$query = "   SELECT      DATE_FORMAT(pred_fecha, '%m') AS mes,
+									SUM(pred_importe) AS importe
+					FROM        san_prepago_detalle
+					WHERE       DATE_FORMAT(pred_fecha, '%Y') = '$fecha_mov'
+					AND         pred_movimiento = 'S'
+					GROUP BY    DATE_FORMAT(pred_fecha, '%m-%Y')";
 		
-		$resultado	= mysqli_query( $conexion, $query );
+		$resultado = mysqli_query($conexion, $query);
 		
-		if( $resultado )
-			while( $fila = mysqli_fetch_assoc( $resultado ) )
-				array_push( $datos, $fila );
+		if ($resultado) {
+			while ($fila = mysqli_fetch_assoc($resultado)) {
+				array_push($datos, $fila);
+			}
+		}
 		
 		return $datos;
 	}
+	
 	
 	function lista_cortes( $fecha_mov )
 	{

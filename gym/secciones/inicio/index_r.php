@@ -78,7 +78,6 @@
 				<span class="touch-class">Retiro de efectivo de la venta</span>
 			</li>
 		</a>
-
 		
 		<?= $m_cambio ?>
 	</ul>

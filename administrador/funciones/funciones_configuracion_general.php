@@ -82,7 +82,7 @@
 							</div>
 							
 							<div class='row'>
-								<div class='col-md-2'>Abono</div>
+								<div class='col-md-2'>Monedero</div>
 								<div class='col-md-4'><input type='text' name='g_abono' class='form-control' value='{$fila['con_abono']}' /></div>
 							</div>
 							

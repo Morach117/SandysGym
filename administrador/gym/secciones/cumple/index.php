@@ -11,7 +11,8 @@ function obtener_socios_cumpleaños()
     $query = "SELECT 
                 soc_id_socio AS id_socio,
                 CONCAT(soc_apepat, ' ', soc_apemat, ' ', soc_nombres) AS nombres,
-                soc_fecha_nacimiento
+                soc_fecha_nacimiento,
+                soc_tel_cel
             FROM 
                 san_socios
             WHERE 
@@ -30,6 +31,7 @@ function obtener_socios_cumpleaños()
                         <td>$i</td>
                         <td>$fila[nombres]</td>
                         <td>$fila[soc_fecha_nacimiento]</td>
+                        <td>$fila[soc_tel_cel]</td>
                       </tr>";
             $i++;
         }
@@ -38,13 +40,13 @@ function obtener_socios_cumpleaños()
 
         // Si no hay datos
         if ($i == 1) {
-            $datos = "<tr><td colspan='3'>No hay socios que cumplan años este mes.</td></tr>";
+            $datos = "<tr><td colspan='4'>No hay socios que cumplan años este mes.</td></tr>";
         }
 
         return $datos;
     } else {
         // Si hay un error en la consulta
-        return "<tr><td colspan='3'>Ocurrió un problema al obtener los datos de los socios: " . mysqli_error($conexion) . "</td></tr>";
+        return "<tr><td colspan='4'>Ocurrió un problema al obtener los datos de los socios: " . mysqli_error($conexion) . "</td></tr>";
     }
 }
 
@@ -52,6 +54,8 @@ function obtener_socios_cumpleaños()
 $gbl_paginado = 10; // Establece aquí la cantidad de registros por página
 $var_exito_cumpleaños = obtener_socios_cumpleaños();
 ?>
+
+
 
 
 
@@ -74,6 +78,8 @@ $var_exito_cumpleaños = obtener_socios_cumpleaños();
                     <th>#</th>
                     <th>Nombre</th>
                     <th>Fecha de Nacimiento</th>
+                    <th>Teléfono</th>
+
 
                 </tr>
             </thead>

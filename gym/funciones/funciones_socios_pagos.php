@@ -251,17 +251,6 @@ function guardar_pago_socio()
                                 if ($v_metodo_pago == 'M') {
                                     $nuevo_saldo_monedero = $saldo_monedero - $pag_monedero;
 
-                                    // Obtener el porcentaje de incremento del consorcio
-                                    $query_consorcio = "SELECT con_mensualidad FROM san_consorcios WHERE con_id_consorcio = $id_consorcio";
-                                    $resultado_consorcio = mysqli_query($conexion, $query_consorcio);
-                                    if ($resultado_consorcio && mysqli_num_rows($resultado_consorcio) > 0) {
-                                        $fila_consorcio = mysqli_fetch_assoc($resultado_consorcio);
-                                        $porcentaje_incremento = floatval($fila_consorcio['con_mensualidad']);
-                                    }
-
-                                    $incremento = $pag_monedero * ($porcentaje_incremento / 100);
-                                    $nuevo_saldo_monedero += $incremento;
-
                                     $query_actualizar_saldo_monedero = "UPDATE san_socios SET soc_mon_saldo = $nuevo_saldo_monedero WHERE soc_id_socio = $id_socio";
                                     $resultado_actualizar_saldo_monedero = mysqli_query($conexion, $query_actualizar_saldo_monedero);
 
@@ -284,24 +273,72 @@ function guardar_pago_socio()
                                     $query_detalle = construir_insert('san_prepago_detalle', $detalle_sql);
                                     mysqli_query($conexion, $query_detalle);
 
-                                    // Insertar el detalle del incremento en san_prepago_detalle
-                                    $detalle_incremento_sql = array(
-                                        'pred_descripcion' => 'Incremento por pago con monedero',
-                                        'pred_importe' => $incremento,
-                                        'pred_saldo' => $nuevo_saldo_monedero,
-                                        'pred_movimiento' => 'Salida',
-                                        'pred_fecha' => $fecha_mov,
-                                        'pred_id_socio' => $id_socio,
-                                        'pred_id_usuario' => $id_usuario
-                                    );
-                                    $query_detalle_incremento = construir_insert('san_prepago_detalle', $detalle_incremento_sql);
-                                    mysqli_query($conexion, $query_detalle_incremento);
-                                    
                                     // Enviar correo electrónico al socio
                                     $correo_socio = obtener_correo_socio($id_socio);
                                     $asunto = "Confirmación de pago con monedero";
                                     $mensaje = "Estimado socio, su pago de $" . number_format($importe_con_descuento, 2) . " ha sido realizado exitosamente utilizando el monedero.";
                                     enviar_correo($correo_socio, $asunto, $mensaje);
+                                } else {
+                                    // Obtener el saldo del monedero anterior
+                                    $query_saldo_monedero = "SELECT soc_mon_saldo FROM san_socios WHERE soc_id_socio = $id_socio";
+                                    $resultado_saldo_monedero = mysqli_query($conexion, $query_saldo_monedero);
+                                    if ($resultado_saldo_monedero && mysqli_num_rows($resultado_saldo_monedero) > 0) {
+                                        $fila_saldo_monedero = mysqli_fetch_assoc($resultado_saldo_monedero);
+                                        $saldo_monedero = $fila_saldo_monedero['soc_mon_saldo'];
+                                    }
+
+                                    // Obtener el porcentaje de incremento del consorcio
+                                    $query_consorcio = "SELECT con_mensualidad FROM san_consorcios WHERE con_id_consorcio = $id_consorcio";
+                                    $resultado_consorcio = mysqli_query($conexion, $query_consorcio);
+                                    if ($resultado_consorcio && mysqli_num_rows($resultado_consorcio) > 0) {
+                                        $fila_consorcio = mysqli_fetch_assoc($resultado_consorcio);
+                                        $porcentaje_incremento = floatval($fila_consorcio['con_mensualidad']);
+                                    }
+
+                                    $incremento = $importe_con_descuento * ($porcentaje_incremento / 100);
+
+                                    // Sumar el incremento al saldo del monedero
+                                    $nuevo_saldo_monedero = $saldo_monedero + $incremento;
+                                    $query_actualizar_saldo_monedero = "UPDATE san_socios SET soc_mon_saldo = ? WHERE soc_id_socio = ? AND soc_id_empresa = ?";
+                                    $stmt_monedero = mysqli_prepare($conexion, $query_actualizar_saldo_monedero);
+                                    if ($stmt_monedero) {
+                                        mysqli_stmt_bind_param($stmt_monedero, 'dii', $nuevo_saldo_monedero, $id_socio, $id_empresa);
+                                        $resultado_monedero = mysqli_stmt_execute($stmt_monedero);
+
+                                        if ($resultado_monedero) {
+                                            // Insertar el detalle del incremento en san_prepago_detalle
+                                            $detalle_incremento_sql = array(
+                                                'pred_descripcion' => 'Incremento por pago con efectivo o tarjeta',
+                                                'pred_importe' => $incremento,
+                                                'pred_saldo' => $nuevo_saldo_monedero,
+                                                'pred_movimiento' => 'Entrada',
+                                                'pred_fecha' => $fecha_mov,
+                                                'pred_id_socio' => $id_socio,
+                                                'pred_id_usuario' => $id_usuario
+                                            );
+                                            $query_detalle_incremento = construir_insert('san_prepago_detalle', $detalle_incremento_sql);
+                                            mysqli_query($conexion, $query_detalle_incremento);
+
+                                            // Enviar correo electrónico al socio
+                                            $correo_socio = obtener_correo_socio($id_socio);
+                                            $asunto = "Confirmación de pago";
+                                            $mensaje = "Estimado socio, su pago de $" . number_format($importe_con_descuento, 2) . " ha sido realizado exitosamente.<br>
+                                            Incremento por pago con efectivo o tarjeta: $" . number_format($incremento, 2) . ".";
+                                            enviar_correo($correo_socio, $asunto, $mensaje);
+                                        } else {
+                                            // Error al actualizar el monedero
+                                            $exito['num'] = 8;
+                                            $exito['msj'] = "No se ha podido actualizar el monedero del socio. " . mysqli_error($conexion);
+                                            return $exito;
+                                        }
+
+                                        mysqli_stmt_close($stmt_monedero);
+                                    } else {
+                                        // Error al preparar la consulta de actualización del monedero
+                                        $exito['num'] = 2;
+                                        $exito['msj'] = "Error al preparar la consulta de actualización del monedero del socio.";
+                                        return $exito;
+                                    }
                                 }
 
                                 $foto = subir_fotografia();
@@ -383,4 +420,3 @@ function obtener_correo_socio($id_socio) {
     }
 }
 ?>
-

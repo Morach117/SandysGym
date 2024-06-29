@@ -31,65 +31,94 @@ if ($enviar) {
 }
 ?>
 
+<style>
+    .input-group .input-group-btn {
+        margin-left: 10px; /* Adds space between the input and the button */
+    }
+    .input-group-btn button {
+        height: 34px; /* Ensures the button is the same height as the input */
+        line-height: 1.42857143; /* Vertically centers the text inside the button */
+    }
+</style>
+
+
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <form action=".?s=visitas&i=nuevo" method="post" class="form-horizontal">
-            <div class="form-group">
-                <label for="hor_nombre" class="col-md-3 control-label">Nombre</label>
-                <div class="col-md-9">
-                    <div class="input-group">
-                        <input type="text" name="hor_nombre" id="hor_nombre" class="form-control" required="required" value="<?= $hor_nombre ?>" />
-                        <input type="hidden" name="id_socio" id="id_socio" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalSocios">
-                                <span class="glyphicon glyphicon-user"></span> Socios
-                            </button>
-                        </span>
-                    </div>
+<form action=".?s=visitas&i=nuevo" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label for="hor_nombre" class="col-md-2 control-label">Nombre</label>
+        <div class="col-md-5">
+            <div class="input-group">
+                <input type="text" name="hor_nombre" id="hor_nombre" class="form-control" required="required" value="<?= $hor_nombre ?>" />
+                <input type="hidden" name="id_socio" id="id_socio" />
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#modalSocios">
+                        <span class="glyphicon glyphicon-user"></span> Socios
+                    </button>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-md-3 control-label">Cuota</label>
-                <div class="col-md-9">
-                    <p class="form-control-static text-info">$<?= number_format($cuota['cuota'], 2) ?></p>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="metodo_pago" class="col-md-3 control-label">Método de Pago</label>
-                <div class="col-md-9">
-                    <select name="metodo_pago" id="metodo_pago" class="form-control">
-                        <option value="E" <?= ($metodo_pago == 'Efectivo') ? 'selected' : '' ?>>Efectivo</option>
-                        <option value="T" <?= ($metodo_pago == 'Tarjeta') ? 'selected' : '' ?>>Tarjeta</option>
-                        <option value="M" <?= ($metodo_pago == 'Monedero') ? 'selected' : '' ?>>Monedero</option>
-                    </select>
-                </div>
-            </div>
-
-            <div id="monedero-section" class="form-group" style="display: none;">
-                <label class="col-md-3 control-label">Saldo Monedero</label>
-                <div class="col-md-9">
-                    <input type="text" id="saldo_monedero" class="form-control" readonly />
-                </div>
-            </div>
-
-            <div id="efectivo-section" class="form-group" style="display: none;">
-                <label class="col-md-3 control-label">Cantidad en Efectivo</label>
-                <div class="col-md-9">
-				<input type="text" class="form-control" id="cantidad_efectivo" name="cantidad_efectivo" value="0" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-12 text-center">
-                    <input type="button" class="btn btn-default" value="Cancelar" onclick="location.href='.?s=visitas'" />
-                    <input type="submit" name="enviar" class="btn btn-primary" value="Guardar" />
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Cuota</label>
+        <div class="col-md-5">
+            <p class="form-control-static text-info">$<?= number_format($cuota['cuota'], 2) ?></p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="metodo_pago" class="col-md-2 control-label">Método de Pago</label>
+        <div class="col-md-5">
+            <select name="metodo_pago" id="metodo_pago" class="form-control">
+                <option value="E" <?= ($metodo_pago == 'Efectivo') ? 'selected' : '' ?>>Efectivo</option>
+                <option value="T" <?= ($metodo_pago == 'Tarjeta') ? 'selected' : '' ?>>Tarjeta</option>
+                <option value="M" <?= ($metodo_pago == 'Monedero') ? 'selected' : '' ?>>Monedero</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="monedero-section" class="form-group" style="display: none;">
+        <label class="col-md-2 control-label">Saldo Monedero</label>
+        <div class="col-md-5">
+            <input type="text" id="saldo_monedero" class="form-control" readonly />
+        </div>
+    </div>
+
+    <div id="efectivo-section" class="form-group" style="display: none;">
+        <label class="col-md-2 control-label">Cantidad en Efectivo</label>
+        <div class="col-md-5">
+            <input type="text" class="form-control" id="cantidad_efectivo" name="cantidad_efectivo" value="0" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <div class="btn-group" role="group">
+                <input type="button" class="btn btn-default" value="Cancelar" onclick="location.href='.?s=visitas'" />
+                <input type="submit" name="enviar" class="btn btn-primary" value="Guardar" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<style>
+    .input-group .form-control {
+    width: calc(130% - 80px); /* Ajusta el ancho del input */
+}
+
+.input-group .input-group-btn {
+    margin-left: 10px; /* Añade espacio entre el input y el botón */
+    width: 80px; /* Ancho del botón */
+}
+
+.input-group-btn button {
+    height: 29px; /* Asegura que el botón tenga la misma altura que el input */
+}
+
+</style>
+
+    </div>
 
 <!-- Modal para mostrar socios -->
 <div class="modal fade" id="modalSocios" tabindex="-1" role="dialog" aria-labelledby="modalSociosLabel">
@@ -125,6 +154,7 @@ if ($enviar) {
 <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css">
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+
 
 
 <script>

@@ -109,9 +109,9 @@
 </div>
 
 <div class="row">
-    <label class="col-md-2">Fecha de Nacimiento <span class="text-danger">*</span></label>
+    <label class="col-md-2">Fecha de Nacimiento <span class="text-danger"></span></label>
     <div class="col-md-4">
-        <input type="date" class="form-control" name="soc_fecha_nacimiento" required="required" value="<?= $datos['soc_fecha_nacimiento'] ?>" />
+        <input type="date" class="form-control" name="soc_fecha_nacimiento"  value="<?= $datos['soc_fecha_nacimiento'] ?>" />
     </div>
 </div>
 

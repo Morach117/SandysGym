@@ -89,7 +89,7 @@ function obtener_porcentaje_descuento($id_promocion)
 }
 
 // Ejemplo de uso
-$id_promocion = 21; // Supongamos que quieres obtener el porcentaje de descuento para la promoción con ID 1
+$id_promocion = 23; // Supongamos que quieres obtener el porcentaje de descuento para la promoción con ID 1
 $porcentaje_descuento = obtener_porcentaje_descuento($id_promocion);
 ?>
 
