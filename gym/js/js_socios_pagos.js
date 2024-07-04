@@ -1,22 +1,3 @@
-function calcular_servicio()
-{
-	var fecha_ini		= document.getElementById( 'pag_fecha_ini' ).value;
-	var servicio		= document.getElementById( 'servicio' ).value;
-	
-	//[pk de servicio en MEN PARCIAL]-[mes]
-	//
-	if( servicio == '5-1' )
-		document.getElementById( 'importe' ).style.display = 'block';
-	else
-		document.getElementById( 'importe' ).style.display = 'none';
-	
-	$.post( "peticiones/pet_socios_pagos.php", { fecha:fecha_ini, servicio:servicio, envio : true },
-	
-	function( datos )
-	{
-		document.getElementById( 'pag_fecha_fin' ).value = datos;
-	});
-}
 
 function mostrar_modal_pago( id_pago, token )
 {
@@ -56,3 +37,4 @@ function imprimir_ticket_pago( id_pago, token )
 		document.getElementById( 'btn_procesar' ).innerHTML	= "<button type='button' data-dismiss='modal' class='btn btn-danger'>Cerrar</button>";
 	}
 }
+

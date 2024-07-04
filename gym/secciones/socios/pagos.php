@@ -151,6 +151,13 @@
     </div>
 
     <div class="row">
+        <label class="col-md-3">Saldo Monedero $</label>
+        <label class="col-md-9">
+            $<?= $nombre['soc_mon_saldo']?>
+        </label>
+    </div>
+
+    <div class="row">
         <label class="col-md-3">Descuento del Cliente (%)</label>
         <label class="col-md-9">
             <?= $nombre['soc_descuento']?>%
@@ -324,59 +331,60 @@
 
 
 <script>
-$('#m_pago').change(function () {
-    var metodoPago = $(this).val();
-    if (metodoPago === 'M') {
-        var idSocio = $('#id_socio').val();
+document.addEventListener('DOMContentLoaded', function () {
+    var descuentoCumpleanosAplicado = false;
+
+    function obtenerUltimoPago(id_socio, callback) {
         $.ajax({
-            url: './funciones/saldo_monedero.php',
+            url: './funciones/obtener_ultimo_pago.php',
             type: 'GET',
-            data: { id_socio: idSocio },
+            data: { id_socio: id_socio },
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
-                    var saldoMonedero = parseFloat(response.saldo_monedero);
-                    var importeServicio = parseFloat(document.getElementById("subtotal").textContent);
-                    
-                    if (saldoMonedero < importeServicio) {
-                        $('#efectivo-section').show(); // Mostrar la sección de pago en efectivo
-                        $('#monedero-section').show(); // Mostrar la sección del monedero
-                        $('#saldo_monedero').val(saldoMonedero.toFixed(2)); // Mostrar el saldo del monedero en el campo de entrada
-                        
-                        var cantidadFaltante = importeServicio - saldoMonedero;
-                        $('#cantidad_efectivo').val(cantidadFaltante.toFixed(2)); // Mostrar la cantidad faltante en el campo de efectivo
-                    } else {
-                        $('#efectivo-section').hide(); // Ocultar la sección de pago en efectivo si no es necesario
-                        $('#monedero-section').show(); // Mostrar la sección del monedero
-                        $('#saldo_monedero').val(saldoMonedero.toFixed(2)); // Mostrar el importe del servicio en el campo de entrada del monedero
-                    }
+                    callback(response.fecha_pago);
                 } else {
-                    console.error('Error al obtener el saldo del monedero:', response.error);
+                    console.error('Error al obtener la fecha del último pago:', response.error);
+                    callback(null);
                 }
             },
             error: function (xhr, status, error) {
-                console.error('Error al obtener el saldo del monedero:', error);
+                console.error('Error al obtener la fecha del último pago:', error);
+                callback(null);
             }
         });
-    } else {
-        $('#efectivo-section').hide(); // Ocultar la sección de pago en efectivo si no se selecciona monedero
-        $('#monedero-section').hide(); // Ocultar la sección del monedero si no se selecciona monedero
-    }
-});
-
-
-
-
-    // Función para obtener parámetros de la URL
-    function obtenerParametroURL(nombre) {
-        var urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get(nombre);
     }
 
-    // Bandera para verificar si ya se ha aplicado el descuento de cumpleaños
-    var descuentoCumpleanosAplicado = false;
+    function calcular_servicio() {
+        var servicio = document.getElementById('servicio').value;
+        var id_socio = document.getElementById('id_socio').value;
 
-    // Función para obtener la cuota del servicio mediante una solicitud AJAX
+        // Mostrar u ocultar el importe según el servicio seleccionado
+        if (servicio == '5-1') {
+            document.getElementById('importe').style.display = 'block';
+        } else {
+            document.getElementById('importe').style.display = 'none';
+        }
+
+        // Obtener la fecha del último pago y luego calcular el servicio
+        obtenerUltimoPago(id_socio, function(fecha_ini) {
+            if (fecha_ini) {
+                document.getElementById('pag_fecha_ini').value = fecha_ini; // Establecer la fecha inicial obtenida
+                $.post("peticiones/pet_socios_pagos.php", { fecha: fecha_ini, servicio: servicio, envio: true },
+                    function(datos) {
+                        document.getElementById('pag_fecha_fin').value = datos;
+                        obtenerCuotaServicio(); // Calcular los totales después de obtener la fecha de fin
+                    }
+                );
+            } else {
+                console.error('No se pudo obtener la fecha del último pago.');
+            }
+        });
+    }
+
+    // Asignar la función calcular_servicio al evento onchange del select de servicio
+    document.getElementById('servicio').onchange = calcular_servicio;
+
     function obtenerCuotaServicio() {
         var servicioSeleccionado = document.getElementById("servicio").value;
         var id_servicio = servicioSeleccionado.split('-')[0];
@@ -422,39 +430,10 @@ $('#m_pago').change(function () {
             }
         };
 
-        xhr.open("GET", "././funciones/obtener_cuota_servicio.php?id_servicio=" + id_servicio, true);
+        xhr.open("GET", "./funciones/obtener_cuota_servicio.php?id_servicio=" + id_servicio, true);
         xhr.send();
     }
 
-    // Función para verificar si el servicio seleccionado tiene descuentos promocionales permitidos
-    function verificarDescuentosPromocionales(id_servicio) {
-        if (descuentoCumpleanosAplicado) return;
-
-        var xhrDescuentos = new XMLHttpRequest();
-        xhrDescuentos.onreadystatechange = function () {
-            if (xhrDescuentos.readyState === XMLHttpRequest.DONE) {
-                if (xhrDescuentos.status === 200) {
-                    var respuestaDescuentos = JSON.parse(xhrDescuentos.responseText);
-                    if (!respuestaDescuentos.success) {
-                        // Mostrar una alerta si el servicio no tiene descuentos promocionales permitidos
-                        alert("El servicio seleccionado no tiene descuentos promocionales permitidos.");
-
-                        // Recargar la página después de 2 segundos
-                        setTimeout(function () {
-                            location.reload();
-                        }, 1000);
-                    }
-                } else {
-                    console.error('Error al realizar la solicitud para verificar los descuentos promocionales:', xhrDescuentos.status);
-                }
-            }
-        };
-
-        xhrDescuentos.open("GET", "././funciones/verificar_descuentos_promocionales.php?id_servicio=" + id_servicio, true);
-        xhrDescuentos.send();
-    }
-
-    // Función para aplicar el descuento del cliente
     function aplicarDescuentoCliente(descuentoCliente) {
         if (descuentoCumpleanosAplicado) return;
 
@@ -462,19 +441,17 @@ $('#m_pago').change(function () {
         var montoDescontadoCliente = cuota * (descuentoCliente / 100);
         var totalConDescuentoCliente = cuota - montoDescontadoCliente;
 
-        // Mostrar el descuento del cliente y el total a pagar
         document.getElementById("descuento").textContent = montoDescontadoCliente.toFixed(2);
         document.getElementById("total").textContent = totalConDescuentoCliente.toFixed(2);
     }
 
-    // Función para aplicar el descuento del código promocional
     function aplicarDescuentoPromocional(codigo_promocion) {
         if (descuentoCumpleanosAplicado) return;
 
         var servicioSeleccionado = document.getElementById("servicio").value;
         var id_servicio = servicioSeleccionado.split('-')[0];
 
-        verificarDescuentosPromocionales(id_servicio); // Verificar descuentos promocionales para el nuevo servicio seleccionado
+        verificarDescuentosPromocionales(id_servicio);
 
         var xhrPromocion = new XMLHttpRequest();
         xhrPromocion.onreadystatechange = function () {
@@ -485,10 +462,8 @@ $('#m_pago').change(function () {
                         var descuentoPromocion = parseFloat(respuestaPromocion.porcentaje_descuento);
                         var cuota = parseFloat(document.getElementById("subtotal").textContent);
 
-                        // Calcular el descuento total sumando el descuento del cliente y el descuento del código promocional
                         var descuentoTotal = 0;
 
-                        // Verificar si el cliente tiene un descuento almacenado
                         var descuentoCliente = parseFloat(<?= json_encode($nombre['soc_descuento']); ?>);
                         if (!isNaN(descuentoCliente)) {
                             descuentoTotal += descuentoCliente;
@@ -499,7 +474,6 @@ $('#m_pago').change(function () {
                         var montoDescontadoTotal = cuota * (descuentoTotal / 100);
                         var totalConDescuentoTotal = cuota - montoDescontadoTotal;
 
-                        // Mostrar el descuento total y el total a pagar
                         document.getElementById("descuento").textContent = montoDescontadoTotal.toFixed(2);
                         document.getElementById("total").textContent = totalConDescuentoTotal.toFixed(2);
                     } else {
@@ -511,11 +485,10 @@ $('#m_pago').change(function () {
             }
         };
 
-        xhrPromocion.open("GET", "././funciones/verificar_codigo_promocional.php?codigo_promocion=" + codigo_promocion, true);
+        xhrPromocion.open("GET", "./funciones/verificar_codigo_promocional.php?codigo_promocion=" + codigo_promocion, true);
         xhrPromocion.send();
     }
 
-    // Función para verificar si el cliente cumple años este mes
     function verificarCumpleanos() {
         console.log("Verificando cumpleaños del cliente...");
 
@@ -532,23 +505,58 @@ $('#m_pago').change(function () {
             alert("¡Feliz cumpleaños! Tienes un descuento especial.");
             document.getElementById("codigo_promocion").value = "70x05U99";
             aplicarDescuentoPromocional("70x05U99");
-            descuentoCumpleanosAplicado = true; // Marcar que se ha aplicado el descuento de cumpleaños
+            descuentoCumpleanosAplicado = true;
         } else {
             console.log("No es el mes de cumpleaños del cliente.");
         }
     }
 
-    // Llamar a la función inicialmente para que se muestre el total correcto al cargar la página
-    obtenerCuotaServicio();
-
-    // Agregar un evento onchange al select de servicio para llamar a la función obtenerCuotaServicio() cuando cambie
-    document.getElementById("servicio").onchange = obtenerCuotaServicio;
-
-    // Agregar un evento onchange al campo de código promocional
     document.getElementById("codigo_promocion").onchange = function () {
         var codigo_promocion = this.value;
         if (codigo_promocion) {
             aplicarDescuentoPromocional(codigo_promocion);
         }
     };
+
+    // Función para manejar el cambio de método de pago
+    $('#m_pago').change(function () {
+        var metodoPago = $(this).val();
+        if (metodoPago === 'M') {
+            var idSocio = $('#id_socio').val();
+            $.ajax({
+                url: './funciones/saldo_monedero.php',
+                type: 'GET',
+                data: { id_socio: idSocio },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        var saldoMonedero = parseFloat(response.saldo_monedero);
+                        var importeServicio = parseFloat(document.getElementById("subtotal").textContent);
+                        
+                        if (saldoMonedero < importeServicio) {
+                            $('#efectivo-section').show();
+                            $('#monedero-section').show();
+                            $('#saldo_monedero').val(saldoMonedero.toFixed(2));
+                            
+                            var cantidadFaltante = importeServicio - saldoMonedero;
+                            $('#cantidad_efectivo').val(cantidadFaltante.toFixed(2));
+                        } else {
+                            $('#efectivo-section').hide();
+                            $('#monedero-section').show();
+                            $('#saldo_monedero').val(saldoMonedero.toFixed(2));
+                        }
+                    } else {
+                        console.error('Error al obtener el saldo del monedero:', response.error);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error al obtener el saldo del monedero:', error);
+                }
+            });
+        } else {
+            $('#efectivo-section').hide();
+            $('#monedero-section').hide();
+        }
+    });
+});
 </script>
