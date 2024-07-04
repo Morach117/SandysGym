@@ -8,8 +8,14 @@ $id_socio = isset($_GET['id_socio']) ? intval($_GET['id_socio']) : '';
 // Obtener la conexión
 $conexion = obtener_conexion();
 
+// Establecer la zona horaria correcta
+date_default_timezone_set('America/Mexico_City');
+
 if ($conexion) {
     if ($id_socio) {
+        // Obtener la fecha actual
+        $hoy = date('Y-m-d');
+
         // Realizar la consulta SQL para obtener la fecha del último pago del socio
         $query = "SELECT pag_fecha_fin FROM san_pagos WHERE pag_id_socio = '$id_socio' ORDER BY pag_id_pago DESC LIMIT 1";
         $result = mysqli_query($conexion, $query);
@@ -20,9 +26,6 @@ if ($conexion) {
             
             // Calcula la fecha límite de 4 días adicionales
             $fecha_limite = date('Y-m-d', strtotime($fecha_ultimo_pago . ' + 4 days'));
-            
-            // Comprueba si hoy es menor o igual a la fecha límite
-            $hoy = date('Y-m-d');
             
             if ($hoy <= $fecha_limite) {
                 // Si estamos dentro de los 4 días adicionales, devuelve la fecha del último pago
@@ -35,8 +38,9 @@ if ($conexion) {
             // Devolver la fecha en formato JSON
             echo json_encode(array("success" => true, "fecha_pago" => $fecha));
         } else {
-            // No se encontró ningún pago para el usuario dado
-            echo json_encode(array("success" => false, "error" => "No se encontró ningún pago para el usuario dado."));
+            // No se encontró ningún pago, devolver la fecha actual
+            $fecha = date('d-m-Y');
+            echo json_encode(array("success" => true, "fecha_pago" => $fecha));
         }
     } else {
         // No se proporcionó ningún ID de socio en la URL

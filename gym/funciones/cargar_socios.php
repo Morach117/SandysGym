@@ -8,7 +8,8 @@ $conexion = obtener_conexion();
 if ($conexion) {
     // Realizar la consulta SQL para obtener los nombres y saldo del monedero de todos los socios
     $query = "SELECT soc_id_socio, CONCAT(soc_nombres, ' ', soc_apepat, ' ', soc_apemat) AS nombre_completo, soc_mon_saldo
-              FROM san_socios";
+              FROM san_socios WHERE soc_id_empresa = 1";
+;
 
     $result = mysqli_query($conexion, $query);
 

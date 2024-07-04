@@ -125,7 +125,12 @@ function guardar_nuevo_dia()
                         $asunto = "Confirmación de visita";
                         $mensaje = "Estimado socio, su visita ha sido registrada exitosamente.<br>
                         Monto gastado de su monedero: $" . number_format($hor_monedero, 2) . "<br>
-                        Nuevo saldo del monedero: $" . number_format($nuevo_saldo_monedero, 2) . ".";
+                        Nuevo saldo del monedero: $" . number_format($nuevo_saldo_monedero, 2) . ".<br>
+                        <label>Socio: </label> $hor_nombre <br/>
+                        <label>Fecha: </label> " . fecha_generica($datos_sql['hor_fecha'], true) . "<br/>
+                        <label>Importe: </label> $" . number_format($datos_sql['hor_importe'], 2) . "<br/>
+                        <label>Modalidad: </label> VISITA";
+
                         enviar_correo($correo_socio, $asunto, $mensaje);
 
                         // Inserción y actualización exitosa
@@ -193,7 +198,13 @@ function guardar_nuevo_dia()
                             $correo_socio = obtener_correo_socio($id_socio);
                             $asunto = "Confirmación de visita";
                             $mensaje = "Estimado socio, su visita ha sido registrada exitosamente.<br>
-                            Incremento por pago con efectivo o tarjeta: $" . number_format($incremento, 2) . ".";
+                            Incremento por pago con efectivo o tarjeta: $" . number_format($incremento, 2) . ".<br>
+                            Nuevo saldo del monedero: $" . number_format($nuevo_saldo_monedero, 2) . ".<br>
+                            <label>Socio: </label> $hor_nombre <br/>
+                            <label>Fecha: </label> " . fecha_generica($datos_sql['hor_fecha'], true) . "<br/>
+                            <label>Importe: </label> $" . number_format($datos_sql['hor_importe'], 2) . "<br/>
+                            <label>Modalidad: </label> VISITA";
+
                             enviar_correo($correo_socio, $asunto, $mensaje);
 
                             // Inserción y actualización exitosa

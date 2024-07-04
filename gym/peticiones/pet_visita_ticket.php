@@ -4,7 +4,7 @@
 	require_once( "../../funciones_globales/funciones_phpBB.php" );
 	require_once( "../funciones/sesiones.php" );
 	
-	$envio		= isset( $_POST['envio'] ) ? true:false;
+	$envio		= isset( $_POST['envio'] ) ? true : false;
 	$id_visita	= request_var( 'id_visita', 0 );
 	$token		= request_var( 'token', '' );
 	$chk_token	= hash_hmac( 'md5', $id_visita, $gbl_key );
@@ -38,7 +38,6 @@
 				{
 					$datos = "	<label>Cajero: </label> $fila[cajero] <br/>
 								<label>Cliente: </label> $fila[cliente] <br/>
-								<label>Genero: </label> $fila[genero] <br/>
 								<label>Fecha: </label> ".fecha_generica( $fila['fecha'], true )." <br/>
 								<label>Importe: </label> $$fila[importe] <br/>
 								<label>Modalidad: </label> $fila[modalidad] <br/>";
@@ -72,7 +71,8 @@
 			<label id="img_procesar">&nbsp;</label>
 			
 			<label id="btn_procesar">
-				<button type="button" onclick="imprimir_ticket_visita( <?= $id_visita.", '".$token."'" ?> )" class="btn btn-primary">Imprimir Ticket</button>
+				<!-- <button type="button" onclick="imprimir_ticket_visita( <?= $id_visita.", '".$token."'" ?> )" class="btn btn-primary">Imprimir Ticket</button> -->
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
 			</label>
 		</div>
 	</div>

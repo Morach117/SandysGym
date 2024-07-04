@@ -119,7 +119,6 @@
 			if( $exito['num'] == 1 )
 			{
 				header( "Location: .?s=socios&i=pagos&id_socio=$exito[IDS]&IDP=$exito[IDP]&token=$exito[tkn]" );
-				// header( "Location: .?s=socios&pag_opciones=2" );
 				exit;
 			}
 			else
@@ -151,11 +150,12 @@
     </div>
 
     <div class="row">
-        <label class="col-md-3">Saldo Monedero $</label>
-        <label class="col-md-9">
-            $<?= $nombre['soc_mon_saldo']?>
-        </label>
-    </div>
+    <label class="col-md-3">Saldo Monedero $:</label>
+    <label class="col-md-9" style="color: red;">
+        $<?= $nombre['soc_mon_saldo'] ?>
+    </label>
+</div>
+
 
     <div class="row">
         <label class="col-md-3">Descuento del Cliente (%)</label>
@@ -194,17 +194,16 @@
                 </div>
             </div>
 
-			<div class="row">
-    <label class="col-md-5">Método de pago</label>
-    <div class="col-md-7">
-        <select class="form-control" name="m_pago" id="m_pago" required>
-            <option value="E" selected>Efectivo</option>
-            <option value="T">Tarjeta</option>
-            <option value="M">Monedero</option>
-        </select>
-    </div>
-</div>
-
+            <div class="row">
+                <label class="col-md-5">Método de pago</label>
+                <div class="col-md-7">
+                    <select class="form-control" name="m_pago" id="m_pago" required>
+                        <option value="E" selected>Efectivo</option>
+                        <option value="T">Tarjeta</option>
+                        <option value="M">Monedero</option>
+                    </select>
+                </div>
+            </div>
 
             <div class="row <?= $class_oculto ?>" id="importe">
                 <label class="col-md-offset-5 col-md-4"><em>Importe a pagar</em></label>
@@ -219,7 +218,7 @@
                 <div class="col-md-7">
                     <input type="text" class="form-control" name="pag_fecha_ini" id="pag_fecha_ini"
                         onchange="calcular_servicio()" required="required" maxlength="10" value="<?= $pag_fecha_ini ?>"
-                        autocomplete="off" />
+                        autocomplete="off" readonly="on"/>
                 </div>
             </div>
 
@@ -227,7 +226,7 @@
                 <label class="col-md-5">Fecha vencimiento</label>
                 <div class="col-md-7">
                     <input type="text" class="form-control" name="pag_fecha_fin" id="pag_fecha_fin"
-                        value="<?= $pag_fecha_fin ?>" autocomplete="off" />
+                        value="<?= $pag_fecha_fin ?>" autocomplete="off" readonly="on" />
                 </div>
             </div>
             <div class="row">
@@ -268,23 +267,19 @@
         </div>
     </div>
 
-
-	<div class="row" id="monedero-section" style="display: none;">
-    <label class="col-md-5">Saldo del monedero</label>
-    <div class="col-md-7">
-        <input type="text" class="form-control" id="saldo_monedero" name="saldo_monedero" value="" readonly />
+    <div class="row" id="monedero-section" style="display: none;">
+        <label class="col-md-5">Saldo del monedero</label>
+        <div class="col-md-7">
+            <input type="text" class="form-control" id="saldo_monedero" name="saldo_monedero" value="" readonly />
+        </div>
     </div>
-</div>
 
-<div class="row" id="efectivo-section" style="display: none;">
+    <div class="row" id="efectivo-section" style="display: none;">
         <label class="col-md-5">Cantidad a pagar en efectivo</label>
         <div class="col-md-7">
             <input type="text" class="form-control" id="cantidad_efectivo" name="cantidad_efectivo" value="0" />
         </div>
     </div>
-
-
-
 
     <div class="row">
         <div class="col-md-12">
@@ -328,7 +323,6 @@
         </table>
     </div>
 </div>
-
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -503,12 +497,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (fechaNacimiento.getMonth() === fechaActual.getMonth()) {
             alert("¡Feliz cumpleaños! Tienes un descuento especial.");
-            document.getElementById("codigo_promocion").value = "70x05U99";
-            aplicarDescuentoPromocional("70x05U99");
+            document.getElementById("codigo_promocion").value = "37H94X98";
+            aplicarDescuentoPromocional("37H94X98");
             descuentoCumpleanosAplicado = true;
         } else {
             console.log("No es el mes de cumpleaños del cliente.");
         }
+    }
+
+    function verificarDescuentosPromocionales(id_servicio) {
+        if (descuentoCumpleanosAplicado) return;
+
+        var xhrDescuentos = new XMLHttpRequest();
+        xhrDescuentos.onreadystatechange = function () {
+            if (xhrDescuentos.readyState === XMLHttpRequest.DONE) {
+                if (xhrDescuentos.status === 200) {
+                    var respuestaDescuentos = JSON.parse(xhrDescuentos.responseText);
+                    if (!respuestaDescuentos.success) {
+                        // Mostrar una alerta si el servicio no tiene descuentos promocionales permitidos
+                        alert("El servicio seleccionado no tiene descuentos promocionales permitidos.");
+
+                        // Recargar la página después de 2 segundos
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    }
+                } else {
+                    console.error('Error al realizar la solicitud para verificar los descuentos promocionales:', xhrDescuentos.status);
+                }
+            }
+        };
+
+        xhrDescuentos.open("GET", "./funciones/verificar_descuentos_promocionales.php?id_servicio=" + id_servicio, true);
+        xhrDescuentos.send();
     }
 
     document.getElementById("codigo_promocion").onchange = function () {
