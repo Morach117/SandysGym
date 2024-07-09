@@ -267,6 +267,7 @@ function enviar_correo($destinatario, $asunto, $mensaje)
         $mail->Port = 587; // Puerto SMTP para STARTTLS
 
         // Configuración del correo
+        $mail->CharSet = 'UTF-8'; // Establecer la codificación de caracteres a UTF-8
         $mail->setFrom('administracion@sandysgym.com', 'Sandys Gym');
         $mail->addAddress($destinatario);
 
