@@ -40,6 +40,7 @@
                     <th>Vigencia Final</th>
                     <th>Porcentaje Descuento</th>
                     <th>Ver</th>
+                    <th>Acción</th>
                 </tr>
             </thead>
 
