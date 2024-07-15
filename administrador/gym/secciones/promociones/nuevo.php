@@ -68,7 +68,7 @@ $servicios_permitidos   = isset($_POST['servicios_permitidos']) ? $_POST['servic
             <select class="form-control" name="utilizado" required>
                 <option disabled selected>Seleccionar...</option>
                 <option value="S" <?= ($utilizado == 'S') ? 'selected' : '' ?>>Sí</option>
-                <option value="N" <?= ($utilizado == 'N') ? 'selected' : '' ?>>No</option>
+                <option value="N" <?= ($utilizado == 'N') ? 'selected' : '' ?>selected>No</option>
             </select>
         </div>
         

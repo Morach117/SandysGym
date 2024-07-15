@@ -292,5 +292,127 @@
 		
 		return $exito;
 	}
+
+	
+	function nombre_archivo_imagen( $id_socio )
+	{
+		global $conexion, $id_empresa;
+		
+		$query		= "SELECT soc_imagen FROM san_socios WHERE soc_id_socio = $id_socio AND soc_id_empresa = $id_empresa";
+		$resultado	= mysqli_query( $conexion, $query );
+		
+		if( $resultado )
+			if( $fila = mysqli_fetch_assoc( $resultado ) )
+				if( $fila['soc_imagen'] )
+					return $fila['soc_imagen'];
+			
+		return 'Sin nombre de imagen...';
+	}
+		
+	function obtener_datos_socio()
+	{
+		Global $conexion, $id_empresa;
+		
+		$id_socio	= request_var( 'id_socio', 0 );
+		
+		$query		= "SELECT * FROM san_socios WHERE soc_id_socio = $id_socio AND soc_id_empresa = $id_empresa";
+		$resultado	= mysqli_query( $conexion, $query );
+		
+		if( $resultado )
+			if( $fila = mysqli_fetch_assoc( $resultado ) )
+				return $fila;
+		
+		return false;
+	}
+	
+	/*
+	tipo	-> T=texto, N=numerico, C=correo, F=fecha
+	max		-> longitud maxima del campo
+	txt		-> texto o descripcion para mostrar un mensaje acerca de este campo
+	req		-> obligatoriedad(S,N)
+	*/
+	
+	function subir_fotografia()
+	{
+		global $conexion, $id_empresa;
+		
+		$id_socio			= request_var( 'id_socio', 0 );
+		
+		$dir_ponencias		= "../imagenes/avatar/";
+		$extenciones		= "/^\.(jpg){1}$/i";
+		$tamaño_maximo		= 2 * 1024 * 1024;
+		$exito				= array();
+		$imagen_guardada	= "";
+		
+		if( isset( $_FILES['avatar'] ) && $_FILES['avatar']['name'] && $id_socio )
+		{
+			$extencion_archivo	= tipo_archivo( $_FILES['avatar']['type'] );
+			$nombre_archivo		= $id_socio.$extencion_archivo;
+			$valido				= is_uploaded_file($_FILES['avatar']['tmp_name']); 
+			
+			if( $valido )
+			{
+				$safe_filename = preg_replace( array( "/\s+/", "/[^-\.\w]+/" ), array( "_", "" ), trim( $_FILES['avatar']['name'] ) );
+				
+				if( $extencion_archivo && $_FILES['avatar']['size'] <= $tamaño_maximo && preg_match( $extenciones, strrchr( $safe_filename, '.' ) ) )
+				{
+					if( move_uploaded_file ( $_FILES['avatar']['tmp_name'], $dir_ponencias.$nombre_archivo ) )
+					{
+						$query		= "SELECT soc_id_socio FROM san_socios WHERE soc_id_socio = $id_socio AND soc_id_empresa = $id_empresa";
+						$resultado	= mysqli_query( $conexion, $query );
+						
+						if( $resultado )
+						{
+							list( $bandera ) = mysqli_fetch_row( $resultado );
+							$imagen_nombre	= $_FILES['avatar']['name'];
+							
+							if( $bandera )
+								$query	= "UPDATE san_socios SET soc_imagen = '$imagen_nombre' WHERE soc_id_socio = $id_socio AND soc_id_empresa = $id_empresa";
+							else
+								$query	= "INSERT INTO san_socios ( soc_imagen ) VALUES ( '$imagen_nombre' )";
+							
+							$resultado	= mysqli_query( $conexion, $query );
+						}
+						
+						$exito['num'] = 1;
+						$exito['msj'] = 'Fotografía guardada.';
+					}
+					else
+					{
+						$exito['num'] = 5;
+						$exito['msj'] = 'La fotografía no se ha guardado.<br/>';
+					}
+				}
+				else
+				{
+					$exito['num'] = 4;
+					$exito['msj'] = 'La fotografía no es del tipo solicitado o excede el tamaño permitido.';
+				}
+			}
+			else
+			{
+				$exito['num'] = 3;
+				$exito['msj'] = 'No es archivo válido.';
+			}
+		}
+		else
+		{
+			$exito['num'] = 2;
+			$exito['msj'] = 'No se selecciono un archivo para la Fotografía.';
+		}
+		
+		return $exito;
+	}
+	
+	function eliminar_fotografia()
+	{
+		global $id_socio;
+		
+		if( file_exists( "../../imagenes/avatar/$id_socio.jpg" ) )
+			if( unlink( "../../imagenes/avatar/$id_socio.jpg" ) )
+				return true;
+		
+		return false;
+	}
 	
 ?>

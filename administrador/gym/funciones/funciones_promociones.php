@@ -132,14 +132,16 @@ function lista_promociones()
                     $status = $row['status'];
                     $is_active = $row['is_active'];
                     $checked = $is_active ? 'checked' : '';
-
-                    $codigos .= "<li>
-                                    $codigo - " . ($status == 0 ? 'El código ha sido usado' : 'El código está activo') . "
+            
+                    $codigos .= "<li style='font-size: 14px;'>
+                                    <span style='font-size: 16px;'>$codigo</span> - " . ($status == 0 ? 'El código ha sido usado' : 'El código está activo') . "
                                     <input type='checkbox' class='codigo-checkbox' data-id='$id_codigo' $checked>
                                  </li>";
                 }
                 mysqli_free_result($resultado_codigos);
             }
+            
+            
 
             // Si no hay códigos, mostrar un mensaje
             if (empty($codigos)) {
@@ -289,3 +291,4 @@ $(document).ready(function() {
     });
 });
 </script>
+
