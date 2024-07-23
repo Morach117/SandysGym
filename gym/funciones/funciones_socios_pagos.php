@@ -180,6 +180,11 @@ function guardar_pago_socio()
                                 }
 
                                 $descuento += $porcentaje_descuento;
+
+                                // Insertar en la tabla san_codigos_usados
+                                $query_insertar_codigo_usado = "INSERT INTO san_codigos_usados (id_socio, codigo_generado, fecha_usado, id_empresa) 
+                                                                VALUES ($id_socio, '$codigo_promocion', '$fecha_mov', $id_empresa)";
+                                mysqli_query($conexion, $query_insertar_codigo_usado);
                             } else {
                                 $exito['num'] = 9;
                                 $exito['msj'] = "El código de promoción proporcionado no es válido o ya ha sido utilizado.";
@@ -376,6 +381,7 @@ function guardar_pago_socio()
 
     return $exito;
 }
+
 
 function enviar_correo($destinatario, $asunto, $mensaje)
 {

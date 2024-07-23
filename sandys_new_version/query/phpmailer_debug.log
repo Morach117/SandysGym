@@ -1,0 +1,422 @@
+2024-05-31 20:48:13 [2] Invalid address:  (to): 111@123111xddxdxdxxd23123
+2024-05-31 20:48:13 [ERROR] Invalid address:  (to): 111@123111xddxdxdxxd23123
+2024-05-31 20:49:16 [2] SERVER -> CLIENT: 220 perfora.net (mreueus004) Nemesis ESMTP Service ready
+
+2024-05-31 20:49:16 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-05-31 20:49:16 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [187.135.208.24]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-05-31 20:49:16 [1] CLIENT -> SERVER: STARTTLS
+
+2024-05-31 20:49:16 [2] SERVER -> CLIENT: 220 OK
+
+2024-05-31 20:49:16 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-05-31 20:49:16 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [187.135.208.24]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-05-31 20:49:16 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-05-31 20:49:16 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-05-31 20:49:16 [1] CLIENT -> SERVER: [credentials hidden]
+2024-05-31 20:49:17 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: [credentials hidden]
+2024-05-31 20:49:17 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-05-31 20:49:17 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-05-31 20:49:17 [2] SERVER -> CLIENT: 250 OK
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: DATA
+
+2024-05-31 20:49:17 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: Date: Fri, 31 May 2024 20:49:16 +0200
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?C=C3=B3digo_de_validaci=C3=B3n?=
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: Message-ID: <boUKlFArazwagUYFT3CUQ4YHDDEAvI9ZeLXPNdE0@localhost>
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: 
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: 
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER:                 <h1 style="color: #333;">Código de Validación</h1>
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER:                 <p>Hola FRANCISCO,</p>
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER:                 <p>Tu código de validación es: <strong>93b7</strong></p>
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER:                 <p>¡Gracias por unirte a Sandys Gym!</p>
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER:             
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: 
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: .
+
+2024-05-31 20:49:17 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=1M7bVJ-1s7rzE2Ta1-007z4n
+
+2024-05-31 20:49:17 [1] CLIENT -> SERVER: QUIT
+
+2024-05-31 20:49:17 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-05-31 21:08:35 [2] SERVER -> CLIENT: 220 perfora.net (mreueus003) Nemesis ESMTP Service ready
+
+2024-05-31 21:08:35 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-05-31 21:08:35 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [187.135.208.24]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-05-31 21:08:35 [1] CLIENT -> SERVER: STARTTLS
+
+2024-05-31 21:08:35 [2] SERVER -> CLIENT: 220 OK
+
+2024-05-31 21:08:35 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-05-31 21:08:35 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [187.135.208.24]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-05-31 21:08:35 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-05-31 21:08:35 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-05-31 21:08:35 [1] CLIENT -> SERVER: [credentials hidden]
+2024-05-31 21:08:35 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-05-31 21:08:35 [1] CLIENT -> SERVER: [credentials hidden]
+2024-05-31 21:08:35 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-05-31 21:08:35 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-05-31 21:08:36 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-05-31 21:08:36 [2] SERVER -> CLIENT: 250 OK
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: DATA
+
+2024-05-31 21:08:36 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: Date: Fri, 31 May 2024 21:08:34 +0200
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?C=C3=B3digo_de_validaci=C3=B3n?=
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: Message-ID: <uFs4ov8G1KjeURJ4hwR0fBIxaKDnSntz92IMSU6MTo@localhost>
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: 
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: 
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER:                 <h1 style="color: #333;">Código de Validación</h1>
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER:                 <p>Hola FRANCISCO,</p>
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER:                 <p>Tu código de validación es: <strong>b6e3</strong></p>
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER:                 <p>¡Gracias por unirte a Sandys Gym!</p>
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER:             
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: 
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: .
+
+2024-05-31 21:08:36 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0MPF2s-1s8jtU1ZZI-004QRS
+
+2024-05-31 21:08:36 [1] CLIENT -> SERVER: QUIT
+
+2024-05-31 21:08:36 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-05-31 21:18:02 [2] SERVER -> CLIENT: 220 perfora.net (mreueus002) Nemesis ESMTP Service ready
+
+2024-05-31 21:18:02 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-05-31 21:18:02 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [187.135.208.24]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-05-31 21:18:02 [1] CLIENT -> SERVER: STARTTLS
+
+2024-05-31 21:18:03 [2] SERVER -> CLIENT: 220 OK
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-05-31 21:18:03 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [187.135.208.24]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-05-31 21:18:03 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: [credentials hidden]
+2024-05-31 21:18:03 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: [credentials hidden]
+2024-05-31 21:18:03 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-05-31 21:18:03 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: RCPT TO:<morach117@gmail.com>
+
+2024-05-31 21:18:03 [2] SERVER -> CLIENT: 250 OK
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: DATA
+
+2024-05-31 21:18:03 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: Date: Fri, 31 May 2024 21:18:02 +0200
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: To: FRANCISCO <morach117@gmail.com>
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?C=C3=B3digo_de_validaci=C3=B3n?=
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: Message-ID: <Jh4ypYN4LKED8uLc9z3xIC20W7uqtMpZl0Ogm5iKzo@localhost>
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: 
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: 
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER:                 <h1 style="color: #333;">Código de Validación</h1>
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER:                 <p>Hola FRANCISCO,</p>
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER:                 <p>Tu código de validación es: <strong>ba5d</strong></p>
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER:                 <p>¡Gracias por unirte a Sandys Gym!</p>
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER:             
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: 
+
+2024-05-31 21:18:03 [1] CLIENT -> SERVER: .
+
+2024-05-31 21:18:04 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0Lp4sc-1sjBKS0gGC-00h3oU
+
+2024-05-31 21:18:04 [1] CLIENT -> SERVER: QUIT
+
+2024-05-31 21:18:04 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-06-01 05:41:31 [2] SERVER -> CLIENT: 220 perfora.net (mreueus004) Nemesis ESMTP Service ready
+
+2024-06-01 05:41:31 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-01 05:41:31 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [187.135.208.24]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-01 05:41:31 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-01 05:41:32 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-01 05:41:32 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [187.135.208.24]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-01 05:41:32 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-01 05:41:32 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-01 05:41:32 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-01 05:41:32 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: RCPT TO:<morach.117@gmail.com>
+
+2024-06-01 05:41:32 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: DATA
+
+2024-06-01 05:41:32 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: Date: Sat, 1 Jun 2024 05:41:31 +0200
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: To: Adrian <morach.117@gmail.com>
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?C=C3=B3digo_de_validaci=C3=B3n?=
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: Message-ID: <DEAnIDW58mvRPNYB1npQQUnldnccULXk0ciWwYq4@localhost>
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: 
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: 
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER:                 <h1 style="color: #333;">Código de Validación</h1>
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER:                 <p>Hola Adrian,</p>
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER:                 <p>Tu código de validación es: <strong>b56d</strong></p>
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER:                 <p>¡Gracias por unirte a Sandys Gym!</p>
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER:             
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: 
+
+2024-06-01 05:41:32 [1] CLIENT -> SERVER: .
+
+2024-06-01 05:41:33 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=1M5fxm-1s64t50yTa-0079uJ
+
+2024-06-01 05:41:33 [1] CLIENT -> SERVER: QUIT
+
+2024-06-01 05:41:33 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
+2024-06-04 23:30:52 [2] SERVER -> CLIENT: 220 perfora.net (mreueus002) Nemesis ESMTP Service ready
+
+2024-06-04 23:30:52 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-04 23:30:52 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [187.135.208.24]
+250-8BITMIME
+250-SIZE 140000000
+250 STARTTLS
+
+2024-06-04 23:30:52 [1] CLIENT -> SERVER: STARTTLS
+
+2024-06-04 23:30:52 [2] SERVER -> CLIENT: 220 OK
+
+2024-06-04 23:30:52 [1] CLIENT -> SERVER: EHLO localhost
+
+2024-06-04 23:30:52 [2] SERVER -> CLIENT: 250-perfora.net Hello localhost [187.135.208.24]
+250-8BITMIME
+250-AUTH LOGIN PLAIN
+250 SIZE 140000000
+
+2024-06-04 23:30:52 [1] CLIENT -> SERVER: AUTH LOGIN
+
+2024-06-04 23:30:53 [2] SERVER -> CLIENT: 334 VXNlcm5hbWU6
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-04 23:30:53 [2] SERVER -> CLIENT: 334 UGFzc3dvcmQ6
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: [credentials hidden]
+2024-06-04 23:30:53 [2] SERVER -> CLIENT: 235 Authentication succeeded
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: MAIL FROM:<administracion@sandysgym.com>
+
+2024-06-04 23:30:53 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: RCPT TO:<morach1.17@gmail.com>
+
+2024-06-04 23:30:53 [2] SERVER -> CLIENT: 250 OK
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: DATA
+
+2024-06-04 23:30:53 [2] SERVER -> CLIENT: 354 Start mail input; end with <CRLF>.<CRLF>
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: Date: Tue, 4 Jun 2024 23:30:52 +0200
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: To: Adrian <morach1.17@gmail.com>
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: From: Sandys Gym <administracion@sandysgym.com>
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: Subject: =?iso-8859-1?Q?C=C3=B3digo_de_validaci=C3=B3n?=
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: Message-ID: <gdFSPMcX2F51lDzuiPHrPaWCCsnOSIZHsIKFqc8@localhost>
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: X-Mailer: PHPMailer 6.9.1 (https://github.com/PHPMailer/PHPMailer)
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: MIME-Version: 1.0
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: Content-Type: text/html; charset=iso-8859-1
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: Content-Transfer-Encoding: 8bit
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: 
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: 
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER:                 <h1 style="color: #333;">Código de Validación</h1>
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER:                 <p>Hola Adrian,</p>
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER:                 <p>Tu código de validación es: <strong>b196</strong></p>
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER:                 <p>¡Gracias por unirte a Sandys Gym!</p>
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER:             
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: 
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: .
+
+2024-06-04 23:30:53 [2] SERVER -> CLIENT: 250 Requested mail action okay, completed: id=0LnyQA-1sh5s51RDE-00dkhX
+
+2024-06-04 23:30:53 [1] CLIENT -> SERVER: QUIT
+
+2024-06-04 23:30:53 [2] SERVER -> CLIENT: 221 perfora.net Service closing transmission channel
+
